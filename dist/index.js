@@ -11004,21 +11004,15 @@ const main = async () => {
         core.info(`result, ${mrg.merged}`);
 
         if (mrg.merged) {
-            await request(`POST ${url2}`, {
-                data: {  
-                    github: owner,
-                },
+            const m1 = await request(`POST ${url2}`, {
+                data: { github: owner },
                 headers: {
                   'Content-Type': 'application/json;charset=utf-8'
                 },
             });
-            // await fetch(url2, {
-            //     method: 'POST',
-            //     headers: {
-            //       'Content-Type': 'application/json;charset=utf-8'
-            //     },
-            //     body: JSON.stringify({ github: owner })
-            // });
+
+            core.info(`result, ${m1}`);
+
         }
     } catch (error) {
         core.setFailed(error.message);
