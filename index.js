@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const report = require('../../cypress/report/report.json');
+// const report = require('../../cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -10,11 +10,11 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         const url = 'https://training.cleverland.by/pull-request/merged'; // /pull-request/opened
         const minimum_required_result = 80;
-        const tests_pass_percent = report.stats.passPercent;
-        const total_tests = report.stats.tests;
-        const failures_test = report.stats.failures;
+        const tests_pass_percent = 50;
+        // const total_tests = report.stats.tests;
+        // const failures_test = report.stats.failures;
         const issue_number = 123;
-        const body = `Процент пройденных: ${tests_pass_percent}. Всего тестов: ${total_tests}. Не пройдено: ${failures_test}.`;
+        const body = `Процент пройденных: ${tests_pass_percent}.`;
 
         const octokit = new github.getOctokit(token);
 
@@ -25,29 +25,29 @@ const main = async () => {
             body,
         });
 
-        const { html_url } = await octokit.rest.pulls.get({
-            owner,
-            repo,
-            pull_number,
-        });
+        // const { html_url } = await octokit.rest.pulls.get({
+        //     owner,
+        //     repo,
+        //     pull_number,
+        // });
 
-        if (tests_pass_percent >= minimum_required_result) {
-            await fetch(url, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: true })
-            });
-        } else {
-            await fetch(url, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: false })
-            });
-        }
+        // if (tests_pass_percent >= minimum_required_result) {
+        //     await fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json;charset=utf-8'
+        //         },
+        //         body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: true })
+        //     });
+        // } else {
+        //     await fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json;charset=utf-8'
+        //         },
+        //         body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: false })
+        //     });
+        // }
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
