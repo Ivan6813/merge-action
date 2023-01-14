@@ -9709,20 +9709,22 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        const resp = await octokit.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number,
-            body,
-        });
-
-        core.info(`resp, ${resp}!!!`);
-
-        // const { html_url } = await octokit.rest.pulls.get({
+        // const resp = await octokit.rest.issues.createComment({
         //     owner,
         //     repo,
-        //     pull_number,
+        //     issue_number,
+        //     body,
         // });
+
+        // core.info(`resp, ${resp}!!!`);
+
+        const { html_url } = await octokit.rest.pulls.get({
+            owner,
+            repo,
+            pull_number,
+        });
+
+        core.info(`url, ${html_url}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
