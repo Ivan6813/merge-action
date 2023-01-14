@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const axios = require('axios');
 // const report = require('../../cypress/report/report.json');
 
 const main = async () => {
@@ -32,15 +33,14 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({ link: data.html_url, github: owner, isTestsSuccess: true })
-        });
+        const resp = await axios.post(url, {
+            link: data.html_url,
+            github: owner,
+            isTestsSuccess: true
+          })
+          .then((response) => response);
 
-        core.info(`url, ${JSON.stringify(response)}!!!`);
+        core.info(`response, ${JSON.stringify(resp)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
