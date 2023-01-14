@@ -10,7 +10,7 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         // const url = 'https://training.cleverland.by/pull-request/merged'; // /pull-request/opened
         // const minimum_required_result = 80;
-        // const tests_pass_percent = 50;
+        const tests_pass_percent = 50;
         // // const total_tests = report.stats.tests;
         // // const failures_test = report.stats.failures;
         const issue_number = 123;
