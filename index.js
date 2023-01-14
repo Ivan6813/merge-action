@@ -33,12 +33,27 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        const resp = await axios.post(url, {
-            link: data.html_url,
-            github: owner,
-            isTestsSuccess: true
-          })
-          .then((response) => response);
+        await octokit.registerEndpoints({
+            foo: {
+              bar: {
+                method: "POST",
+                url: url,
+                headers: {
+                    accept: "application/vnd.github.foo-bar-preview+json",
+                },
+                params: {
+                  body: {
+                    required: true,
+                    type: "string",
+                  },
+                },
+              },
+            },
+          });
+          
+        const resp = await octokit.foo.bar({
+            body: JSON.stringify({ link: data.html_url, github: owner, isTestsSuccess: true }),
+        });
 
         core.info(`response, ${JSON.stringify(resp)}!!!`);
 
