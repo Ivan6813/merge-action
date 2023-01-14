@@ -30,16 +30,16 @@ const main = async () => {
         //     body,
         // });
 
-        // core.info(`resp, ${resp}!!!`);
+        core.info(`resp, ${resp}!!!`);
 
-        const resp = await octokit.rest.pulls.get({
+        const { data } = await octokit.rest.pulls.get({
             owner,
             repo,
             pull_number,
         });
 
-        core.info(`octokit, ${JSON.stringify(octokit)}!!!`);
-        core.info(`url, ${JSON.stringify(resp)}!!!`);
+        core.info(`octokit, ${JSON.stringify(octokit.rest.issues)}!!!`);
+        core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
