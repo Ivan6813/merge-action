@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { request } = require("@octokit/request");
-const report = require('../../../cypress/report/report.json');
+// const report = require('../../../cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -31,18 +31,18 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`report, ${JSON.stringify(report)}!!!`);
+        core.info(`report, ${__dirname}!!!`);
 
-        await request(`POST ${url}`, {
-            data: { 
-                link: data.html_url, 
-                github: owner, 
-                isTestsSuccess: tests_pass_percent >= minimum_required_result
-            },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
+        // await request(`POST ${url}`, {
+        //     data: { 
+        //         link: data.html_url, 
+        //         github: owner, 
+        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
+        //     },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,

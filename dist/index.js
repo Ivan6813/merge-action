@@ -10755,14 +10755,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 8957:
-/***/ ((module) => {
-
-module.exports = eval("require")("../../../cypress/report/report.json");
-
-
-/***/ }),
-
 /***/ 2877:
 /***/ ((module) => {
 
@@ -10943,7 +10935,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
-const report = __nccwpck_require__(8957);
+// const report = require('../../../cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -10973,18 +10965,18 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`report, ${JSON.stringify(report)}!!!`);
+        core.info(`report, ${__dirname}!!!`);
 
-        await request(`POST ${url}`, {
-            data: { 
-                link: data.html_url, 
-                github: owner, 
-                isTestsSuccess: tests_pass_percent >= minimum_required_result
-            },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
+        // await request(`POST ${url}`, {
+        //     data: { 
+        //         link: data.html_url, 
+        //         github: owner, 
+        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
+        //     },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
