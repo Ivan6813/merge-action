@@ -10935,6 +10935,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
+const fs = __nccwpck_require__(7147);
 // const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
 
 const main = async () => {
@@ -10971,7 +10972,8 @@ const main = async () => {
             path: 'cypress/report/report.json',
         });
 
-        const result = window.decodeURI(content);
+        let buff = new Buffer(content, 'base64');
+        const result = fs.writeFileSync('report.json', buff);
 
         core.info(`result, ${result}`);
 

@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { request } = require("@octokit/request");
+const fs = require('fs');
 // const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
 
 const main = async () => {
@@ -37,7 +38,8 @@ const main = async () => {
             path: 'cypress/report/report.json',
         });
 
-        const result = window.decodeURI(content);
+        let buff = new Buffer(content, 'base64');
+        const result = fs.writeFileSync('report.json', buff);
 
         core.info(`result, ${result}`);
 
