@@ -33,6 +33,7 @@ const main = async () => {
             owner: owner,
             repo: repo,
             path: 'cypress/report/report.json',
+            ref: 'sprint-1'
         });
 
         // let buff = new Buffer(report.content, 'base64');
@@ -52,16 +53,18 @@ const main = async () => {
         const total_tests = jsn.stats.tests;
         const failures_test = jsn.stats.failures;
 
-        await request(`POST ${url}`, {
-            data: { 
-                link: data.html_url, 
-                github: owner,
-                isTestsSuccess: tests_pass_percent >= minimum_required_result
-            },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
+        core.info(`result, ${tests_pass_percent}`);
+
+        // await request(`POST ${url}`, {
+        //     data: { 
+        //         link: data.html_url, 
+        //         github: owner,
+        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
+        //     },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
