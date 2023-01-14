@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { request } = require("@octokit/request");
-const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
+// const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -31,8 +31,13 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`report, ${report}!!!`);
-        core.info(`path, ${__dirname}!!!`);
+        const resp = await octokit.rest.repos.getContent({
+            owner: owner,
+            repo: repo,
+            path: './cypress/report/report.json',
+        });
+
+        core.info(`report, ${resp}!!!`);
 
         // await request(`POST ${url}`, {
         //     data: { 

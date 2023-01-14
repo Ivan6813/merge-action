@@ -10755,14 +10755,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 5777:
-/***/ ((module) => {
-
-module.exports = eval("require")("../../../test-sprint-marathon/main/cypress/report/report.json");
-
-
-/***/ }),
-
 /***/ 2877:
 /***/ ((module) => {
 
@@ -10943,7 +10935,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
-const report = __nccwpck_require__(5777);
+// const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -10973,8 +10965,13 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`report, ${report}!!!`);
-        core.info(`path, ${__dirname}!!!`);
+        const resp = await octokit.rest.repos.getContent({
+            owner: owner,
+            repo: repo,
+            path: './cypress/report/report.json',
+        });
+
+        core.info(`report, ${resp}!!!`);
 
         // await request(`POST ${url}`, {
         //     data: { 
