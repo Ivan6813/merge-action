@@ -30,7 +30,7 @@ const main = async () => {
         //     body,
         // });
 
-        core.info(`resp, ${resp}!!!`);
+        // core.info(`resp, ${resp}!!!`);
 
         const { data } = await octokit.rest.pulls.get({
             owner,
