@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const axios = require('axios');
+// const axios = require('axios');
+const { request } = require("@octokit/request");
 // const report = require('../../cypress/report/report.json');
 
 const main = async () => {
@@ -33,29 +34,14 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        await octokit.registerEndpoints({
-            foo: {
-              bar: {
-                method: "POST",
-                url: url,
-                headers: {
-                    accept: "application/vnd.github.foo-bar-preview+json",
-                },
-                params: {
-                  body: {
-                    required: true,
-                    type: "string",
-                  },
-                },
-              },
+        const options = request("POST http://localhost:3021/pull-request/opened", {
+            data: { link: data.html_url, github: owner, isTestsSuccess: true },
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
             },
           });
-          
-        const resp = await octokit.foo.bar({
-            body: JSON.stringify({ link: data.html_url, github: owner, isTestsSuccess: true }),
-        });
 
-        core.info(`response, ${JSON.stringify(resp)}!!!`);
+        core.info(`response, ${JSON.stringify(options)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
