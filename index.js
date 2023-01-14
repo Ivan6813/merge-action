@@ -49,7 +49,7 @@ const main = async () => {
             title: 'foo',
             body: 'bar',
             userId: 1,
-        });
+        }).then(response => response );
 
         core.info(`response, ${JSON.stringify(resp)}!!!`);
 
