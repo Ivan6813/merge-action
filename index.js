@@ -67,7 +67,7 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`result, ${mrg.merged}`);
+        core.info(`result, ${JSON.stringify(mrg.merged)}`);
 
         if (mrg.merged) {
             const m1 = await request(`POST ${url2}`, {
