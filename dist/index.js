@@ -10935,6 +10935,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
+const fs = __nccwpck_require__(7147);
 
 const main = async () => {
     try {
@@ -10943,6 +10944,7 @@ const main = async () => {
         const pull_number = core.getInput('pull_number', { required: true });
         const token = core.getInput('token', { required: true });
         const url = 'https://training.cleverland.by/pull-request/opened';
+        const url2 = 'https://training.cleverland.by/pull-request/merged';
         const minimum_required_result = 80;
         const obj = `Процент пройденных: 30.`;
 
@@ -10993,21 +10995,29 @@ const main = async () => {
             },
         });
 
-        // const { merged } = await octokit.rest.pulls.merge({
-        //     owner,
-        //     repo,
-        //     pull_number,
-        // });
+        const { data: mrg } = await octokit.rest.pulls.merge({
+            owner,
+            repo,
+            pull_number,
+        });
 
-        // if (merged) {
-        //     await fetch(url, {
-        //         method: 'POST',
-        //         headers: {
-        //           'Content-Type': 'application/json;charset=utf-8'
-        //         },
-        //         body: JSON.stringify({ github: owner })
-        //     });
-        // }
+        if (mrg.merged) {
+            await request(`POST ${url2}`, {
+                data: {  
+                    github: owner,
+                },
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                },
+            });
+            // await fetch(url2, {
+            //     method: 'POST',
+            //     headers: {
+            //       'Content-Type': 'application/json;charset=utf-8'
+            //     },
+            //     body: JSON.stringify({ github: owner })
+            // });
+        }
     } catch (error) {
         core.setFailed(error.message);
     }
