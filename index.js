@@ -32,16 +32,16 @@ const main = async () => {
             pull_number,
         });
 
-        const content = await octokit.rest.repos.getContent({
+        const { data: report } = await octokit.rest.repos.getContent({
             owner: owner,
             repo: repo,
             path: 'cypress/report/report.json',
         });
 
-        // let buff = new Buffer(content, 'base64');
-        // const result = fs.writeFileSync('report.json', buff);
+        let buff = new Buffer(report.content, 'base64');
+        const result = fs.writeFileSync('report.json', buff);
 
-        core.info(`result, ${JSON.stringify(content)}`);
+        core.info(`result, ${result}`);
 
         // await request(`POST ${url}`, {
         //     data: { 
