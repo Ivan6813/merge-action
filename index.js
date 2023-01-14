@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-// const axios = require('axios');
+const axios = require('axios');
 const { request } = require("@octokit/request");
 // const report = require('../../cypress/report/report.json');
 
@@ -34,14 +34,16 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        const options = request("POST http://localhost:3021/pull-request/opened", {
-            data: { link: data.html_url, github: owner, isTestsSuccess: true },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-          });
+        // const options = request("POST http://localhost:3021/pull-request/opened", {
+        //     data: { link: data.html_url, github: owner, isTestsSuccess: true },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //   });
 
-        core.info(`response, ${JSON.stringify(options)}!!!`);
+        const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+
+        core.info(`response, ${JSON.stringify(response)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
