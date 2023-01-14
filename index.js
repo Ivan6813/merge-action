@@ -15,11 +15,6 @@ const main = async () => {
         // // const failures_test = report.stats.failures;
         const obj = `Процент пройденных: ${tests_pass_percent}.`;
 
-        core.info(`Hello, ${owner}!!!`);
-        core.info(`repo, ${repo}!!!`);
-        core.info(`pull_number, ${pull_number}!!!`);
-        core.info(`token, ${token}!!!`);
-
         const octokit = new github.getOctokit(token);
 
         const resp = await octokit.rest.issues.createComment({
@@ -29,7 +24,7 @@ const main = async () => {
             body: obj,
         });
 
-        core.info(`resp, ${resp}!!!`);
+        core.info(`resp, ${JSON.stringify(resp)}!!!`);
 
         const { data } = await octokit.rest.pulls.get({
             owner,
@@ -37,7 +32,6 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`octokit, ${JSON.stringify(octokit.rest.issues)}!!!`);
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
