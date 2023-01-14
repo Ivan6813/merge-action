@@ -38,6 +38,7 @@ const main = async () => {
             pull_number,
         });
 
+        core.info(`octokit, ${octokit}!!!`);
         core.info(`url, ${html_url}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
