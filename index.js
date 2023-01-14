@@ -37,7 +37,7 @@ const main = async () => {
             path: 'cypress/report/report.json',
         });
 
-        core.info(`report, ${resp}!!!`);
+        core.info(`report, ${JSON.stringify(resp)}!!!`);
 
         // await request(`POST ${url}`, {
         //     data: { 
