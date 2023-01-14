@@ -10755,6 +10755,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 8957:
+/***/ ((module) => {
+
+module.exports = eval("require")("../../../cypress/report/report.json");
+
+
+/***/ }),
+
 /***/ 2877:
 /***/ ((module) => {
 
@@ -10935,7 +10943,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
-// const report = require('../../cypress/report/report.json');
+const report = __nccwpck_require__(8957);
 
 const main = async () => {
     try {
@@ -10944,12 +10952,11 @@ const main = async () => {
         const pull_number = core.getInput('pull_number', { required: true });
         const token = core.getInput('token', { required: true });
         const url = 'http://localhost:3021/pull-request/opened';
-        // const minimum_required_result = 80;
+        const minimum_required_result = 80;
         const tests_pass_percent = 50;
         // // const total_tests = report.stats.tests;
         // // const failures_test = report.stats.failures;
         const obj = `Процент пройденных: ${tests_pass_percent}.`;
-        const url2 = 'https://jsonplaceholder.typicode.com/posts'
 
         const octokit = new github.getOctokit(token);
 
@@ -10966,32 +10973,18 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
+        core.info(`report, ${JSON.stringify(report)}!!!`);
 
-        await request(`POST ${url2}`, {
-            data: { title: 'foo', body: 'bar', userId: 1 },
+        await request(`POST ${url}`, {
+            data: { 
+                link: data.html_url, 
+                github: owner, 
+                isTestsSuccess: tests_pass_percent >= minimum_required_result
+            },
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             },
         });
-
-        // if (tests_pass_percent >= minimum_required_result) {
-        //     await fetch(url, {
-        //         method: 'POST',
-        //         headers: {
-        //           'Content-Type': 'application/json;charset=utf-8'
-        //         },
-        //         body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: true })
-        //     });
-        // } else {
-        //     await fetch(url, {
-        //         method: 'POST',
-        //         headers: {
-        //           'Content-Type': 'application/json;charset=utf-8'
-        //         },
-        //         body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: false })
-        //     });
-        // }
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
