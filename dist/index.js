@@ -10967,14 +10967,12 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        const options = await request('POST https://jsonplaceholder.typicode.com/posts', {
+        await request('POST https://jsonplaceholder.typicode.com/posts', {
             data: { title: 'foo', body: 'bar', userId: 1 },
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             },
         });
-
-        core.info(`response, ${JSON.stringify(options)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
