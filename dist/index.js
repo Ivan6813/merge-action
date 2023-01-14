@@ -10981,18 +10981,20 @@ const main = async () => {
 
         const str = buff.toString('utf-8');
 
-        core.info(`result, ${str}`);
+        const jsn = JSON.parse(str);
 
-        await request(`POST ${url}`, {
-            data: { 
-                link: data.html_url, 
-                github: 'ValadzkoAliaksei',
-                isTestsSuccess: tests_pass_percent >= minimum_required_result
-            },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
+        core.info(`result, ${jsn.stats.passPercent}`);
+
+        // await request(`POST ${url}`, {
+        //     data: { 
+        //         link: data.html_url, 
+        //         github: 'ValadzkoAliaksei',
+        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
+        //     },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
