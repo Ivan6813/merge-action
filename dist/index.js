@@ -10935,8 +10935,6 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
-const fs = __nccwpck_require__(7147);
-// const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -10970,11 +10968,6 @@ const main = async () => {
             ref: 'sprint-1'
         });
 
-        // let buff = new Buffer(report.content, 'base64');
-        // const result = fs.writeFileSync('report.json', buff);
-
-        // Buffer.from(report.content, 'base64').toString('hex')
-
         const buff = Buffer.from(report.content, 'base64');
 
         const str = buff.toString('utf-8');
@@ -10989,18 +10982,18 @@ const main = async () => {
 
         core.info(`result, ${tests_pass_percent}`);
 
-        // await request(`POST ${url}`, {
-        //     data: { 
-        //         link: data.html_url, 
-        //         github: owner,
-        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
-        //     },
-        //     headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        // });
+        await request(`POST ${url}`, {
+            data: { 
+                link: data.html_url, 
+                github: owner,
+                isTestsSuccess: tests_pass_percent >= minimum_required_result
+            },
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+        });
 
-         // const { merged } = await octokit.rest.pulls.merge({
+        // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
         //     repo,
         //     pull_number,
