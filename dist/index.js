@@ -17229,20 +17229,24 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        const options = request("POST https://jsonplaceholder.typicode.com/posts", {
-            data: JSON.stringify({
-                title: 'foo',
-                body: 'bar',
-                userId: 1,
-            }),
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
+        // const options = await request("POST https://jsonplaceholder.typicode.com/posts", {
+        //     data: JSON.stringify({
+        //         title: 'foo',
+        //         body: 'bar',
+        //         userId: 1,
+        //     }),
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
+
+        const resp = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+            title: 'foo',
+            body: 'bar',
+            userId: 1,
         });
 
-        // const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
-
-        core.info(`response, ${JSON.stringify(options)}!!!`);
+        core.info(`response, ${JSON.stringify(resp)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
