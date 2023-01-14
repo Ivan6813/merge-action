@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { request } = require("@octokit/request");
-// const report = require('../../../cypress/report/report.json');
+const report = require('../../../test-sprint-marathon/main/cypress/report/report.json');
 
 const main = async () => {
     try {
@@ -31,7 +31,8 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`report, ${__dirname}!!!`);
+        core.info(`report, ${report}!!!`);
+        core.info(`path, ${__dirname}!!!`);
 
         // await request(`POST ${url}`, {
         //     data: { 
