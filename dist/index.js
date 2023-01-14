@@ -10946,10 +10946,7 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         const url = 'https://training.cleverland.by/pull-request/opened';
         const minimum_required_result = 80;
-        const tests_pass_percent = 30;
-        // // const total_tests = report.stats.tests;
-        // // const failures_test = report.stats.failures;
-        const obj = `Процент пройденных: ${tests_pass_percent}.`;
+        const obj = `Процент пройденных: 30.`;
 
         const octokit = new github.getOctokit(token);
 
@@ -10985,16 +10982,20 @@ const main = async () => {
 
         core.info(`result, ${jsn.stats.passPercent}`);
 
-        // await request(`POST ${url}`, {
-        //     data: { 
-        //         link: data.html_url, 
-        //         github: 'ValadzkoAliaksei',
-        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
-        //     },
-        //     headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        // });
+        const tests_pass_percent = jsn.stats.passPercent;
+        const total_tests = jsn.stats.tests;
+        const failures_test = jsn.stats.failures;
+
+        await request(`POST ${url}`, {
+            data: { 
+                link: data.html_url, 
+                github: owner,
+                isTestsSuccess: tests_pass_percent >= minimum_required_result
+            },
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+        });
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
