@@ -43,7 +43,11 @@ const main = async () => {
 
         // Buffer.from(report.content, 'base64').toString('hex')
 
-        core.info(`result, ${Buffer.from(report.content, 'base64').toString('hex')}`);
+        const buff = Buffer.from(report.content, 'base64');
+
+        const str = buff.toString('utf-8');
+
+        core.info(`result, ${str}`);
 
         // await request(`POST ${url}`, {
         //     data: { 
