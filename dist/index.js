@@ -10968,7 +10968,7 @@ const main = async () => {
         const resp = await octokit.rest.repos.getContent({
             owner: owner,
             repo: repo,
-            path: './cypress/report/report.json',
+            path: 'cypress/report/report.json',
         });
 
         core.info(`report, ${resp}!!!`);
