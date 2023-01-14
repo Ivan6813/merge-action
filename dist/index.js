@@ -11001,6 +11001,8 @@ const main = async () => {
             pull_number,
         });
 
+        core.info(`result, ${mrg.merged}`);
+
         if (mrg.merged) {
             await request(`POST ${url2}`, {
                 data: {  
