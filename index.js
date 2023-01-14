@@ -12,7 +12,7 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         const url = 'https://training.cleverland.by/pull-request/opened';
         const minimum_required_result = 80;
-        const tests_pass_percent = 90;
+        const tests_pass_percent = 30;
         // // const total_tests = report.stats.tests;
         // // const failures_test = report.stats.failures;
         const obj = `Процент пройденных: ${tests_pass_percent}.`;
