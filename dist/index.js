@@ -10975,23 +10975,23 @@ const main = async () => {
             },
         });
 
-        if (tests_pass_percent >= minimum_required_result) {
-            await fetch(url, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: true })
-            });
-        } else {
-            await fetch(url, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: false })
-            });
-        }
+        // if (tests_pass_percent >= minimum_required_result) {
+        //     await fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json;charset=utf-8'
+        //         },
+        //         body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: true })
+        //     });
+        // } else {
+        //     await fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json;charset=utf-8'
+        //         },
+        //         body: JSON.stringify({ link: html_url, github: owner, isTestsSuccess: false })
+        //     });
+        // }
 
          // const { merged } = await octokit.rest.pulls.merge({
         //     owner,
