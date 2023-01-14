@@ -9703,14 +9703,12 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        const resp = await octokit.rest.issues.createComment({
+        await octokit.rest.issues.createComment({
             owner: owner,
             repo: repo,
             issue_number: pull_number,
             body: obj,
         });
-
-        core.info(`resp, ${JSON.stringify(resp)}!!!`);
 
         const { data } = await octokit.rest.pulls.get({
             owner,
