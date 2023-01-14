@@ -10965,13 +10965,15 @@ const main = async () => {
             pull_number,
         });
 
-        const resp = await octokit.rest.repos.getContent({
+        const { content } = await octokit.rest.repos.getContent({
             owner: owner,
             repo: repo,
             path: 'cypress/report/report.json',
         });
 
-        core.info(`report, ${JSON.stringify(resp)}!!!`);
+        const result = window.decodeURI(content);
+
+        core.info(`result, ${result}`);
 
         // await request(`POST ${url}`, {
         //     data: { 
