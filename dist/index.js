@@ -9699,8 +9699,8 @@ const main = async () => {
         // const tests_pass_percent = 50;
         // // const total_tests = report.stats.tests;
         // // const failures_test = report.stats.failures;
-        // const issue_number = 123;
-        // const body = `Процент пройденных: ${tests_pass_percent}.`;
+        const issue_number = 123;
+        const body = `Процент пройденных: ${tests_pass_percent}.`;
 
         core.info(`Hello, ${owner}!!!`);
         core.info(`repo, ${repo}!!!`);
@@ -9709,12 +9709,14 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        // await octokit.rest.issues.createComment({
-        //     owner,
-        //     repo,
-        //     issue_number,
-        //     body,
-        // });
+        const resp = await octokit.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number,
+            body,
+        });
+
+        core.info(`resp, ${resp}!!!`);
 
         // const { html_url } = await octokit.rest.pulls.get({
         //     owner,
