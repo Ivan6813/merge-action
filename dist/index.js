@@ -9718,14 +9718,14 @@ const main = async () => {
 
         // core.info(`resp, ${resp}!!!`);
 
-        const { html_url } = await octokit.rest.pulls.get({
+        const resp = await octokit.rest.pulls.get({
             owner,
             repo,
             pull_number,
         });
 
         core.info(`octokit, ${octokit}!!!`);
-        core.info(`url, ${html_url}!!!`);
+        core.info(`url, ${resp}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
