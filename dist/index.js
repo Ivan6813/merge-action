@@ -9724,8 +9724,8 @@ const main = async () => {
             pull_number,
         });
 
-        core.info(`octokit, ${octokit}!!!`);
-        core.info(`url, ${resp}!!!`);
+        core.info(`octokit, ${JSON.stringify(octokit)}!!!`);
+        core.info(`url, ${JSON.stringify(resp)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
