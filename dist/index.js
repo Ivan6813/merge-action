@@ -17229,16 +17229,20 @@ const main = async () => {
 
         core.info(`url, ${JSON.stringify(data.html_url)}!!!`);
 
-        // const options = request("POST http://localhost:3021/pull-request/opened", {
-        //     data: { link: data.html_url, github: owner, isTestsSuccess: true },
-        //     headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //   });
+        const options = request("POST https://jsonplaceholder.typicode.com/posts", {
+            data: JSON.stringify({
+                title: 'foo',
+                body: 'bar',
+                userId: 1,
+            }),
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+        });
 
-        const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+        // const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
 
-        core.info(`response, ${JSON.stringify(response)}!!!`);
+        core.info(`response, ${JSON.stringify(options)}!!!`);
 
         // if (tests_pass_percent >= minimum_required_result) {
         //     await fetch(url, {
