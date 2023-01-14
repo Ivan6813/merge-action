@@ -10972,10 +10972,10 @@ const main = async () => {
             path: 'cypress/report/report.json',
         });
 
-        let buff = new Buffer(content, 'base64');
-        const result = fs.writeFileSync('report.json', buff);
+        // let buff = new Buffer(content, 'base64');
+        // const result = fs.writeFileSync('report.json', buff);
 
-        core.info(`result, ${result}`);
+        core.info(`result, ${content}`);
 
         // await request(`POST ${url}`, {
         //     data: { 
