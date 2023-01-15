@@ -40,6 +40,8 @@ const main = async () => {
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
 
+        const str = "test" + "\n" + "test1" + "\n" + "test2";
+
         const func = () => {
             return `
             #  Результаты тестов  
@@ -68,7 +70,7 @@ const main = async () => {
             owner,
             repo,
             issue_number: pull_number,
-            body: func(),
+            body: str,
         });
 
         // tests_screenshots.forEach(async ({ download_url }) => {
