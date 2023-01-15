@@ -10977,6 +10977,7 @@ const main = async () => {
         const jsn = JSON.parse(str);
 
         core.info(`result, ${jsn.stats.passPercent}`);
+        core.info(`data, ${data}`);
 
         const tests_pass_percent = jsn.stats.passPercent;
         const total_tests = jsn.stats.tests;
@@ -10984,36 +10985,35 @@ const main = async () => {
 
         core.info(`result, ${tests_pass_percent}`);
 
-        await request(`POST ${url}`, {
-            data: { 
-                link: data.html_url, 
-                github: owner,
-                isTestsSuccess: tests_pass_percent >= minimum_required_result
-            },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
+        // await request(`POST ${url}`, {
+        //     data: { 
+        //         link: data.html_url, 
+        //         github: owner,
+        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
+        //     },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
 
-        const { data: mrg } = await octokit.rest.pulls.merge({
-            owner,
-            repo,
-            pull_number,
-        });
+        // const { data: mrg } = await octokit.rest.pulls.merge({
+        //     owner,
+        //     repo,
+        //     pull_number,
+        // });
 
-        core.info(`result, ${mrg.merged}`);
+        // core.info(`result, ${mrg.merged}`);
 
-        if (mrg.merged) {
-            const m1 = await request(`POST ${url2}`, {
-                data: { github: owner },
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-            });
+        // if (mrg.merged) {
+        //     const m1 = await request(`POST ${url2}`, {
+        //         data: { github: owner },
+        //         headers: {
+        //           'Content-Type': 'application/json;charset=utf-8'
+        //         },
+        //     });
 
-            core.info(`result, ${JSON.stringify(m1)}`);
-
-        }
+        //     core.info(`result, ${JSON.stringify(m1)}`);
+        // }
     } catch (error) {
         core.setFailed(error.message);
     }
