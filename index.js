@@ -13,11 +13,12 @@ const main = async () => {
         const url2 = 'https://training.cleverland.by/pull-request/merged';
         const minimum_required_result = 80;
         const obj = `Процент пройденных: 30.`;
+        const path_to_tests_report = 'cypress/report/report.json'
 
         const octokit = new github.getOctokit(token);
 
         await octokit.rest.issues.createComment({
-            owner: owner,
+            owner: 'ClevertecTest',
             repo: repo,
             issue_number: pull_number,
             body: obj,
@@ -32,8 +33,8 @@ const main = async () => {
         const { data: report } = await octokit.rest.repos.getContent({
             owner: owner,
             repo: repo,
-            path: 'cypress/report/report.json',
-            ref: 'sprint-1'
+            path: path_to_tests_report,
+            ref: data.head.ref
         });
 
         const buff = Buffer.from(report.content, 'base64');
@@ -43,7 +44,7 @@ const main = async () => {
         const jsn = JSON.parse(str);
 
         core.info(`result, ${jsn.stats.passPercent}`);
-        core.info(`data, ${JSON.stringify(data)}`);
+        core.info(`data, ${data.head.ref}`);
 
         const tests_pass_percent = jsn.stats.passPercent;
         const total_tests = jsn.stats.tests;
