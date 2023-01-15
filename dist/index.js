@@ -10974,22 +10974,35 @@ const main = async () => {
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
 
-        const tests_result_message = `
-#  Результаты тестов  
-Процент пройденных тестов: ${passPercent}%.
-Общее количество тестов: ${tests}.
-Количество непройденных тестов: ${failures}.  
+        const func = () => {
+            return `
+            #  Результаты тестов  
+            Процент пройденных тестов: ${passPercent}%.
+            Общее количество тестов: ${tests}.
+            Количество непройденных тестов: ${failures}.  
+            
+            ![Скриншот автотестов](${tests_screenshots[0].download_url})  
+            
+            ![Скриншот автотестов](${tests_screenshots[1].download_url})
+            `;
+        };
 
-![Скриншот автотестов](${tests_screenshots[0].download_url})  
+//         const tests_result_message = `
+// #  Результаты тестов  
+// Процент пройденных тестов: ${passPercent}%.
+// Общее количество тестов: ${tests}.
+// Количество непройденных тестов: ${failures}.  
 
-![Скриншот автотестов](${tests_screenshots[1].download_url})
-`;
+// ![Скриншот автотестов](${tests_screenshots[0].download_url})  
+
+// ![Скриншот автотестов](${tests_screenshots[1].download_url})
+// `;
 
         await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
-            body: tests_result_message,
+            body: func(),
         });
 
         // tests_screenshots.forEach(async ({ download_url }) => {
