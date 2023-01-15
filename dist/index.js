@@ -10970,26 +10970,30 @@ const main = async () => {
             ref: pull_request_info.head.ref
         });
 
-        const arrScreenshotsLinks = tests_screenshots.map(screen => screen.download_url);
-
         const buff = Buffer.from(tests_report.content, 'base64');
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
-        const messageWithScreen = `![Иллюстрация к проекту](${arrScreenshotsLinks[1]})`;
 
         const tests_result_message = `
-            #  Заголовок первого уровня  
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
             Количество непройденных тестов: ${failures}.  
-            ![Иллюстрация к проекту](${arrScreenshotsLinks[0]})
         `;
-       
+
         await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
             body: tests_result_message,
+        });
+
+        tests_screenshots.forEach(async ({ download_url }, index) => {
+            await octokit.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: pull_number + index,
+                body: `![Скриншот автотестов](${download_url})`,
+            });
         });
 
         await request(`POST ${url}`, {
