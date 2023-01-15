@@ -11,6 +11,7 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         const url = 'https://training.cleverland.by/pull-request/opened';
         const path_to_tests_report = 'cypress/report/report.json';
+        const path_to_tests_screenshots = 'cypress/report/screenshots/sprint4.cy.js';
         const minimum_required_result = 80;
 
         const octokit = new github.getOctokit(token);
@@ -28,9 +29,17 @@ const main = async () => {
             ref: pull_request_info.head.ref
         });
 
+        const { data: tests_screenshots } = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path: path_to_tests_report,
+            ref: pull_request_info.head.ref
+        });
+
         const buff = Buffer.from(tests_report.content, 'base64');
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
+        const text = `${JSON.stringify(tests_screenshots)}`
         const res = `![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)`;
 
         const tests_result_message = `
@@ -45,7 +54,7 @@ const main = async () => {
             owner,
             repo,
             issue_number: pull_number,
-            body: tests_result_message,
+            body: text,
         });
 
         await request(`POST ${url}`, {
