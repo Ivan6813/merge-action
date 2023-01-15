@@ -36,7 +36,7 @@ const main = async () => {
         const tests_result_message = `
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
-            Количество непройденных тестов: ${failures}.
+            Количество непройденных тестов: ${failures}.  
             ${res}
         `;
        
