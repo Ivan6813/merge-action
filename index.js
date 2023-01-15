@@ -44,8 +44,10 @@ const main = async () => {
 #  Результаты тестов  
 Процент пройденных тестов: ${passPercent}%.
 Общее количество тестов: ${tests}.
-Количество непройденных тестов: ${failures}.
-![Скриншот автотестов](${tests_screenshots[0].download_url})
+Количество непройденных тестов: ${failures}.  
+
+![Скриншот автотестов](${tests_screenshots[0].download_url})  
+
 ![Скриншот автотестов](${tests_screenshots[1].download_url})
 `;
 
@@ -56,14 +58,14 @@ const main = async () => {
             body: tests_result_message,
         });
 
-        tests_screenshots.forEach(async ({ download_url }) => {
-            await octokit.rest.issues.createComment({
-                owner,
-                repo,
-                issue_number: pull_number,
-                body: `![Скриншот автотестов](${download_url})`,
-            });
-        });
+        // tests_screenshots.forEach(async ({ download_url }) => {
+        //     await octokit.rest.issues.createComment({
+        //         owner,
+        //         repo,
+        //         issue_number: pull_number,
+        //         body: `![Скриншот автотестов](${download_url})`,
+        //     });
+        // });
 
         await request(`POST ${url}`, {
             data: { 
