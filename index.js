@@ -36,7 +36,7 @@ const main = async () => {
             Общее количество тестов: ${tests}.
             Количество непройденных тестов: ${failures}.
         `;
-        const res = '![Иллюстрация к проекту](https://raw.githubusercontent.com/Ivan6813/test-sprint-marathon/sprint-1/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)'
+        const res = `![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)`
 
         await octokit.rest.issues.createComment({
             owner,
