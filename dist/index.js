@@ -10968,6 +10968,7 @@ const main = async () => {
         const res = `![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)`;
 
         const tests_result_message = `
+            #  Заголовок первого уровня  
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
             Количество непройденных тестов: ${failures}.  
