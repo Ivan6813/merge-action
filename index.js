@@ -35,6 +35,7 @@ const main = async () => {
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
             Количество непройденных тестов: ${failures}.
+            ![Иллюстрация к проекту](https://raw.githubusercontent.com/Ivan6813/test-sprint-marathon/sprint-1/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)
         `;
 
         await octokit.rest.issues.createComment({
