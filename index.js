@@ -16,11 +16,17 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
+        const { data: pull_request_info } = await octokit.rest.pulls.get({
+            owner,
+            repo,
+            pull_number,
+        });
+
         const { data: tests_report } = await octokit.rest.repos.getContent({
             owner,
             repo,
             path: path_to_tests_report,
-            ref: data.head.ref
+            ref: pull_request_info.head.ref
         });
 
         const buff = Buffer.from(tests_report.content, 'base64');
@@ -37,12 +43,6 @@ const main = async () => {
             repo,
             issue_number: pull_number,
             body: tests_result_message,
-        });
-
-        const { data: pull_request_info } = await octokit.rest.pulls.get({
-            owner,
-            repo,
-            pull_number,
         });
 
         await request(`POST ${url}`, {
