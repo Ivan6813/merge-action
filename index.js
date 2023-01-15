@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { request } = require("@octokit/request");
-const fs = require("fs");
+const { request } = require('@octokit/request');
+const fs = require('fs');
 
 const main = async () => {
     try {
@@ -12,56 +12,49 @@ const main = async () => {
         const url = 'https://training.cleverland.by/pull-request/opened';
         const url2 = 'https://training.cleverland.by/pull-request/merged';
         const minimum_required_result = 80;
-        const obj = `Процент пройденных: 30.`;
         const path_to_tests_report = 'cypress/report/report.json'
 
         const octokit = new github.getOctokit(token);
+
+        const { data: tests_report } = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path: path_to_tests_report,
+            ref: data.head.ref
+        });
+
+        const buff = Buffer.from(tests_report.content, 'base64');
+        const report_json = JSON.parse(buff.toString('utf-8'));
+        const { tests, failures, passPercent } = report_json.stats
+        const tests_result_message = `
+            Процент пройденных тестов: ${passPercent}%.
+            Общее количество тестов: ${tests}.
+            Количество непройдённых тестов: ${failures}.
+        `;
 
         await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
-            body: obj,
+            body: tests_result_message,
         });
 
-        const { data } = await octokit.rest.pulls.get({
+        const { data: pull_request_info } = await octokit.rest.pulls.get({
             owner,
             repo,
             pull_number,
         });
 
-        const { data: report } = await octokit.rest.repos.getContent({
-            owner: owner,
-            repo: repo,
-            path: path_to_tests_report,
-            ref: data.head.ref
+        await request(`POST ${url}`, {
+            data: { 
+                link: pull_request_info.html_url, 
+                github: owner,
+                isTestsSuccess: passPercent >= minimum_required_result
+            },
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
         });
-
-        const buff = Buffer.from(report.content, 'base64');
-
-        const str = buff.toString('utf-8');
-
-        const jsn = JSON.parse(str);
-
-        core.info(`result, ${jsn.stats.passPercent}`);
-        core.info(`data, ${data.head.ref}`);
-
-        const tests_pass_percent = jsn.stats.passPercent;
-        const total_tests = jsn.stats.tests;
-        const failures_test = jsn.stats.failures;
-
-        core.info(`result, ${tests_pass_percent}`);
-
-        // await request(`POST ${url}`, {
-        //     data: { 
-        //         link: data.html_url, 
-        //         github: owner,
-        //         isTestsSuccess: tests_pass_percent >= minimum_required_result
-        //     },
-        //     headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        // });
 
         // const { data: mrg } = await octokit.rest.pulls.merge({
         //     owner,
