@@ -10975,6 +10975,7 @@ const main = async () => {
         const { tests, failures, passPercent } = tests_stats;
 
         const tests_result_message = `
+#  Заголовок первого уровня  
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
             Количество непройденных тестов: ${failures}.  
