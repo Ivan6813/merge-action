@@ -18,8 +18,8 @@ const main = async () => {
         const octokit = new github.getOctokit(token);
 
         await octokit.rest.issues.createComment({
-            owner: 'ClevertecTest',
-            repo: repo,
+            owner,
+            repo,
             issue_number: pull_number,
             body: obj,
         });
