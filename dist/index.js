@@ -10976,6 +10976,7 @@ const main = async () => {
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
         const text = `${JSON.stringify(arr)}`
+        const rese = `![Иллюстрация к проекту](${arr[1]})`;
         const res = `![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)`;
 
         const tests_result_message = `
@@ -10990,7 +10991,7 @@ const main = async () => {
             owner,
             repo,
             issue_number: pull_number,
-            body: text,
+            body: rese,
         });
 
         await request(`POST ${url}`, {
