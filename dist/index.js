@@ -10989,26 +10989,6 @@ const main = async () => {
             },
         });
 
-        // const { data: mrg } = await octokit.rest.pulls.merge({
-        //     owner,
-        //     repo,
-        //     pull_number,
-        // });
-
-        // core.info(`result, ${mrg.merged}`);
-
-        // const url2 = 'https://training.cleverland.by/pull-request/merged';
-
-        // if (mrg.merged) {
-        //     const m1 = await request(`POST ${url2}`, {
-        //         data: { github: owner },
-        //         headers: {
-        //           'Content-Type': 'application/json;charset=utf-8'
-        //         },
-        //     });
-
-        //     core.info(`result, ${JSON.stringify(m1)}`);
-        // }
     } catch (error) {
         core.setFailed(error.message);
     }
