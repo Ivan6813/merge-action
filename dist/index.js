@@ -10974,42 +10974,22 @@ const main = async () => {
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
 
-        const func = () => {
-            let str = "#  Результаты тестов" + "\n" + `Процент пройденных тестов: ${passPercent}%.` + "\n" + `Общее количество тестов: ${tests}.` + "\n" + `Количество непройденных тестов: ${failures}. + "\n"`;
+        const createTestsResultMessage = () => {
+            let tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
             tests_screenshots.forEach(({ download_url }) => {
-                str += `![Скриншот автотестов](${download_url}) + "\n"`
+                tests_result_message += `![Скриншот автотестов](${download_url})` + '\n';
             });
 
-            return str;
+            return tests_result_message;
         };
-
-//         const tests_result_message = `
-// #  Результаты тестов  
-// Процент пройденных тестов: ${passPercent}%.
-// Общее количество тестов: ${tests}.
-// Количество непройденных тестов: ${failures}.  
-
-// ![Скриншот автотестов](${tests_screenshots[0].download_url})  
-
-// ![Скриншот автотестов](${tests_screenshots[1].download_url})
-// `;
 
         await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
-            body: func(),
+            body: createTestsResultMessage(),
         });
-
-        // tests_screenshots.forEach(async ({ download_url }) => {
-        //     await octokit.rest.issues.createComment({
-        //         owner,
-        //         repo,
-        //         issue_number: pull_number,
-        //         body: `![Скриншот автотестов](${download_url})`,
-        //     });
-        // });
 
         await request(`POST ${url}`, {
             data: { 
