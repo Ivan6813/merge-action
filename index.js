@@ -57,7 +57,7 @@ const main = async () => {
             await octokit.rest.issues.createComment({
                 owner,
                 repo,
-                issue_number: pull_number + index + 1,
+                issue_number: pull_number++,
                 body: `![Скриншот автотестов](${download_url})`,
             });
         });
