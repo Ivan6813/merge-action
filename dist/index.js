@@ -10977,7 +10977,7 @@ const main = async () => {
         const jsn = JSON.parse(str);
 
         core.info(`result, ${jsn.stats.passPercent}`);
-        core.info(`data, ${data}`);
+        core.info(`data, ${JSON.stringify(data)}`);
 
         const tests_pass_percent = jsn.stats.passPercent;
         const total_tests = jsn.stats.tests;
