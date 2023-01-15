@@ -10966,7 +10966,7 @@ const main = async () => {
         const { data: tests_screenshots } = await octokit.rest.repos.getContent({
             owner,
             repo,
-            path: path_to_tests_report,
+            path: path_to_tests_screenshots,
             ref: pull_request_info.head.ref
         });
 
