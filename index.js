@@ -53,7 +53,7 @@ const main = async () => {
             body: tests_result_message,
         });
 
-        tests_screenshots.forEach(async ({ download_url }, index) => {
+        tests_screenshots.forEach(async ({ download_url }) => {
             await octokit.rest.issues.createComment({
                 owner,
                 repo,
