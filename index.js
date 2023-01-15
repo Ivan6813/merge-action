@@ -31,23 +31,20 @@ const main = async () => {
         const buff = Buffer.from(tests_report.content, 'base64');
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
+        const res = `![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)`;
+
         const tests_result_message = `
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
             Количество непройденных тестов: ${failures}.
+            ${res}
         `;
-        const res = `
-            "![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)"
-            "![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)"
-            "![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)"
-            "![Иллюстрация к проекту](https://raw.githubusercontent.com/${owner}/${repo}/${pull_request_info.head.ref}/cypress/report/screenshots/sprint4.cy.js/active-category-design.png)"
-        `;
-
+       
         await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
-            body: res,
+            body: tests_result_message,
         });
 
         await request(`POST ${url}`, {
