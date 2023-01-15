@@ -10974,19 +10974,14 @@ const main = async () => {
         const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         const { tests, failures, passPercent } = tests_stats;
 
-        const str = "test" + "\n" + "test1" + "\n" + "test2";
-
         const func = () => {
-            return `
-            #  Результаты тестов  
-            Процент пройденных тестов: ${passPercent}%.
-            Общее количество тестов: ${tests}.
-            Количество непройденных тестов: ${failures}.  
+            let str = "#  Результаты тестов" + "\n" + `Процент пройденных тестов: ${passPercent}%.` + "\n" + `Общее количество тестов: ${tests}.` + "\n" + `Количество непройденных тестов: ${failures}. + "\n"`;
             
-            ![Скриншот автотестов](${tests_screenshots[0].download_url})  
-            
-            ![Скриншот автотестов](${tests_screenshots[1].download_url})
-            `;
+            tests_screenshots.forEach(({ download_url }) => {
+                str += `![Скриншот автотестов](${download_url}) + "\n"`
+            });
+
+            return str;
         };
 
 //         const tests_result_message = `
@@ -11004,7 +10999,7 @@ const main = async () => {
             owner,
             repo,
             issue_number: pull_number,
-            body: str,
+            body: func(),
         });
 
         // tests_screenshots.forEach(async ({ download_url }) => {
