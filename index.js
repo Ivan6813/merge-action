@@ -10,9 +10,8 @@ const main = async () => {
         const pull_number = core.getInput('pull_number', { required: true });
         const token = core.getInput('token', { required: true });
         const url = 'https://training.cleverland.by/pull-request/opened';
-        const url2 = 'https://training.cleverland.by/pull-request/merged';
+        const path_to_tests_report = 'cypress/report/report.json';
         const minimum_required_result = 80;
-        const path_to_tests_report = 'cypress/report/report.json'
 
         const octokit = new github.getOctokit(token);
 
@@ -30,12 +29,12 @@ const main = async () => {
         });
 
         const buff = Buffer.from(tests_report.content, 'base64');
-        const report_json = JSON.parse(buff.toString('utf-8'));
-        const { tests, failures, passPercent } = report_json.stats
+        const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
+        const { tests, failures, passPercent } = tests_stats;
         const tests_result_message = `
             Процент пройденных тестов: ${passPercent}%.
             Общее количество тестов: ${tests}.
-            Количество непройдённых тестов: ${failures}.
+            Количество непройденных тестов: ${failures}.
         `;
 
         await octokit.rest.issues.createComment({
@@ -63,6 +62,8 @@ const main = async () => {
         // });
 
         // core.info(`result, ${mrg.merged}`);
+
+        // const url2 = 'https://training.cleverland.by/pull-request/merged';
 
         // if (mrg.merged) {
         //     const m1 = await request(`POST ${url2}`, {
