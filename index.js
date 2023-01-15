@@ -41,11 +41,13 @@ const main = async () => {
         const { tests, failures, passPercent } = tests_stats;
 
         const tests_result_message = `
-#  Заголовок первого уровня  
-            Процент пройденных тестов: ${passPercent}%.
-            Общее количество тестов: ${tests}.
-            Количество непройденных тестов: ${failures}.  
-        `;
+#  Результаты тестов  
+Процент пройденных тестов: ${passPercent}%.
+Общее количество тестов: ${tests}.
+Количество непройденных тестов: ${failures}.
+![Скриншот автотестов](${tests_screenshots[0].download_url})
+![Скриншот автотестов](${tests_screenshots[1].download_url})
+`;
 
         await octokit.rest.issues.createComment({
             owner,
