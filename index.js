@@ -17,9 +17,9 @@ const main = async () => {
         let tests_result_message = '';
 
         fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
-            // const { tests, failures, passPercent } = data.stats;
+            const { stats } = JSON.stringify(data);
 
-            console.log(data);
+            console.log(stats);
             console.log(typeof data);
 
             // tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
