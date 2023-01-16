@@ -10958,13 +10958,11 @@ const main = async () => {
         const minimum_required_result = 80;
         let tests_result_message = '';
 
-        const rep = fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
+        fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats } = JSON.parse(data);
+            const { tests, failures, passPercent } = tests_stats;
 
-            console.log(stats);
-            console.log(typeof data);
-
-            // tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
         });
 
