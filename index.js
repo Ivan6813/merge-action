@@ -18,7 +18,7 @@ const main = async () => {
             console.log(data);
         });
           
-        console.log('readFile called');
+        console.log(__dirname);
 
         const octokit = new github.getOctokit(token);
 
