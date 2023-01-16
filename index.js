@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { request } = require('@octokit/request');
 const fs = require('fs');
+const { cwd } = require('node:process');
 
 const main = async () => {
     try {
@@ -17,6 +18,8 @@ const main = async () => {
         fs.readFile('../../../test-sprint-marathon/main/cypress/report/report.json', 'utf8', function(err, data){
             console.log(data);
         });
+
+        console.log(`Current directory: ${cwd()}`);
           
         console.log(__dirname);
 

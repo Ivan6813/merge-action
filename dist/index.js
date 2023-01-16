@@ -10819,6 +10819,14 @@ module.exports = require("net");
 
 /***/ }),
 
+/***/ 7742:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:process");
+
+/***/ }),
+
 /***/ 2037:
 /***/ ((module) => {
 
@@ -10936,6 +10944,7 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
 const fs = __nccwpck_require__(7147);
+const { cwd } = __nccwpck_require__(7742);
 
 const main = async () => {
     try {
@@ -10951,6 +10960,8 @@ const main = async () => {
         fs.readFile('../../../test-sprint-marathon/main/cypress/report/report.json', 'utf8', function(err, data){
             console.log(data);
         });
+
+        console.log(`Current directory: ${cwd()}`);
           
         console.log(__dirname);
 
