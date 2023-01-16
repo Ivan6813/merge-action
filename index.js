@@ -17,9 +17,12 @@ const main = async () => {
         let tests_result_message = '';
 
         fs.readFile('cypress/report/report.json', 'utf8', (err, data) => {
-            const { tests, failures, passPercent } = data.stats;
+            // const { tests, failures, passPercent } = data.stats;
 
-            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+            console.log(data);
+            console.log(data.stats);
+
+            // tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
         });
 
