@@ -10960,7 +10960,7 @@ const main = async () => {
 
         fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats } = JSON.parse(data);
-            const { tests, failures, passPercent } = tests_stats;
+            const { tests, failures, passPercent } = stats;
 
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
