@@ -16,7 +16,7 @@ const main = async () => {
         const minimum_required_result = 80;
         let tests_result_message = '';
 
-        fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
+        fs.readFile('cypress/report/report.json', 'utf8', (err, data) => {
             const { tests, failures, passPercent } = data.stats;
 
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
