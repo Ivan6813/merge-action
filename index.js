@@ -15,7 +15,7 @@ const main = async () => {
         const path_to_tests_screenshots = 'cypress/report/screenshots/sprint4.cy.js';
         const minimum_required_result = 80;
 
-        fs.readFile('./././test-sprint-marathon/main/cypress/report/report.json', 'utf8', function(err, data){
+        fs.readFile('cypress/report/report.json', 'utf8', function(err, data){
             console.log(data);
         });
 
@@ -61,12 +61,12 @@ const main = async () => {
             return tests_result_message;
         };
 
-        await octokit.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number: pull_number,
-            body: createTestsResultMessage(),
-        });
+        // await octokit.rest.issues.createComment({
+        //     owner,
+        //     repo,
+        //     issue_number: pull_number,
+        //     body: createTestsResultMessage(),
+        // });
 
         // await request(`POST ${url}`, {
         //     data: { 
