@@ -14,6 +14,12 @@ const main = async () => {
         const path_to_tests_screenshots = 'cypress/report/screenshots/sprint4.cy.js';
         const minimum_required_result = 80;
 
+        fs.readFile('report.json', 'utf8', function(err, data){
+            console.log(data);
+        });
+          
+        console.log('readFile called');
+
         const octokit = new github.getOctokit(token);
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
