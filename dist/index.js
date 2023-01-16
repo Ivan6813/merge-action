@@ -10958,8 +10958,8 @@ const main = async () => {
         const minimum_required_result = 80;
         let tests_result_message = '';
 
-        fs.readFile(path_to_tests_report, 'utf8', ({ stats }) => {
-            const { tests, failures, passPercent } = stats;
+        fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
+            const { tests, failures, passPercent } = data.stats;
 
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
