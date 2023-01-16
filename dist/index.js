@@ -10957,7 +10957,7 @@ const main = async () => {
         const path_to_tests_screenshots = 'cypress/report/screenshots/sprint4.cy.js';
         const minimum_required_result = 80;
 
-        fs.readFile('../../../test-sprint-marathon/main/cypress/report/report.json', 'utf8', function(err, data){
+        fs.readFile('./././test-sprint-marathon/main/cypress/report/report.json', 'utf8', function(err, data){
             console.log(data);
         });
 
