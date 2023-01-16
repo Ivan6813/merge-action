@@ -14,7 +14,7 @@ const main = async () => {
         const path_to_tests_screenshots = 'cypress/report/screenshots/sprint4.cy.js';
         const minimum_required_result = 80;
 
-        fs.readFile('report.json', 'utf8', function(err, data){
+        fs.readFile('../../test-sprint-marathon/main/cypress/report/report.json', 'utf8', function(err, data){
             console.log(data);
         });
           
@@ -63,16 +63,16 @@ const main = async () => {
             body: createTestsResultMessage(),
         });
 
-        await request(`POST ${url}`, {
-            data: { 
-                link: pull_request_info.html_url, 
-                github: owner,
-                isTestsSuccess: passPercent >= minimum_required_result
-            },
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
+        // await request(`POST ${url}`, {
+        //     data: { 
+        //         link: pull_request_info.html_url, 
+        //         github: owner,
+        //         isTestsSuccess: passPercent >= minimum_required_result
+        //     },
+        //     headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // });
 
     } catch (error) {
         core.setFailed(error.message);
