@@ -12488,7 +12488,7 @@ const main = async () => {
         const form = new FormData();
         form.append('my_field', 'my value');
         form.append('my_buffer', new Buffer(10));
-        form.append('my_file', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+        form.append('my_file', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/'));
 
         console.log(form);
 
