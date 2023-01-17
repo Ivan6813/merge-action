@@ -61,8 +61,12 @@ const main = async () => {
       
         const data = new FormData();
         data.append('github', 'ValadzkoAliaksei');
-        data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
-        data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+        // data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+        // data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+
+        fs.readdirSync(path_to_tests_screenshots).forEach(file => {
+            data.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file}`));
+        });
 
         var config = {
         method: 'post',
