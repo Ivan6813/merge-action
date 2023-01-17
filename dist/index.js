@@ -17326,17 +17326,17 @@ const main = async () => {
 
         const createTestsResultMessage = () => {
             data.forEach(({ url }) => {
-                tests_result_message += `![Скриншот автотестов](https://training.cleverland.by${url})` + '\n';
+                tests_result_message += `![Скриншот автотестов](https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png)` + '\n';
             });
 
             return tests_result_message;
         };
-
+        // https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png
         await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
-            body: createTestsResultMessage(),
+            body: tests_result_message,
         });
 
         // await request(`POST ${url}`, {
