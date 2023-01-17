@@ -12530,9 +12530,9 @@ const main = async () => {
             //     files: [fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png')]
             // },
             data: form,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // },
         });
 
         console.log(resp);
