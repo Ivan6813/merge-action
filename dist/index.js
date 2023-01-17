@@ -17325,10 +17325,8 @@ const main = async () => {
         // const { tests, failures, passPercent } = tests_stats;
 
         const createTestsResultMessage = () => {
-            let tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
-            
-            tests_screenshots.forEach(({ download_url }) => {
-                tests_result_message += `![Скриншот автотестов](${download_url})` + '\n';
+            data.forEach(({ url }) => {
+                tests_result_message += `![Скриншот автотестов](https://training.cleverland.by${url})` + '\n';
             });
 
             return tests_result_message;
@@ -17338,7 +17336,7 @@ const main = async () => {
             owner,
             repo,
             issue_number: pull_number,
-            body: tests_result_message,
+            body: createTestsResultMessage(),
         });
 
         // await request(`POST ${url}`, {
