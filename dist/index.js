@@ -12486,9 +12486,8 @@ const main = async () => {
         });
 
         const form = new FormData();
-        form.append('my_field', 'my value');
-        form.append('my_buffer', new Buffer(10));
-        form.append('my_file', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/'));
+        form.append('github', "pull_request_info.user.login");
+        form.append('files', [fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/')]);
 
         console.log(form);
 
