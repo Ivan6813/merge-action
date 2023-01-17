@@ -40,9 +40,9 @@ const main = async () => {
         
         // });
 
-        // fs.readdirSync(path_to_tests_screenshots).forEach(file => {
-        //     console.log(file);
-        //   });
+        fs.readdirSync(path_to_tests_screenshots).forEach(file => {
+            console.log(file);
+        });
 
         //   fs.readdirSync(path_to_tests_screenshots, {withFileTypes: true}).forEach(file => {
         //     console.log(file);
