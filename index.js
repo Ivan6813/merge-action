@@ -25,17 +25,21 @@ const main = async () => {
         });
 
         
-        fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
-            console.log(data);
-        });
+        // fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
+        //     console.log(data);
+        // });
 
-        fs.readdir(path_to_tests_screenshots, function(err, items) {
+        // fs.readdir(path_to_tests_screenshots, function(err, items) {
  
-            for (let i = 0; i < items.length; i++) {
-                console.log(typeof items[i]);
-            }
+        //     for (let i = 0; i < items.length; i++) {
+        //         console.log(typeof items[i]);
+        //     }
         
-        });
+        // });
+
+        fs.readdirSync(path_to_tests_screenshots).forEach(file => {
+            console.log(file);
+          });
 
         const octokit = new github.getOctokit(token);
 
