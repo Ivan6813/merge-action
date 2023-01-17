@@ -25,18 +25,6 @@ const main = async () => {
             
         });
 
-        const form = new FormData();
-        form.append('github', "pull_request_info.user.login");
-        form.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/'));
-
-        console.log(form);
-
-         await request(`POST https://training.cleverland.by/pull-request/save-images`, {
-            data: {},
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-        });
 
         
         // fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
@@ -67,6 +55,22 @@ const main = async () => {
             owner,
             repo,
             pull_number,
+        });
+
+        
+        // const form = new FormData();
+        // form.append('github', "pull_request_info.user.login");
+        // form.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/'));
+
+        // console.log(form);
+
+         await request(`POST https://training.cleverland.by/pull-request/save-images`, {
+            data: {
+                github: pull_request_info.user.login,
+            },
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
         });
 
         // console.log(pull_request_info);
