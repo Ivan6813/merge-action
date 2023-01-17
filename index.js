@@ -30,7 +30,7 @@ const main = async () => {
         form.append('my_buffer', new Buffer(10));
         form.append('my_file', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
 
-        console/log(form);
+        console.log(form);
 
         
         // fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
