@@ -59,32 +59,30 @@ const main = async () => {
         });
 
       
-        const data = new FormData();
-        data.append('github', 'ValadzkoAliaksei');
-        // data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
-        // data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
-
+        const formData = new FormData();
+        formData.append('github', 'ValadzkoAliaksei');
+        
         fs.readdirSync(path_to_tests_screenshots).forEach(file => {
-            data.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file}`));
+            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file}`));
         });
 
         const config = {
             method: 'post',
             url: 'https://training.cleverland.by/pull-request/save-images',
             headers: { 
-                ...data.getHeaders()
+                ...formData.getHeaders()
             },
-            data : data
+            data : formData
         };
 
-        const resp = await axios(config);
+        const { data } = await axios(config);
         // .then(function (response) {
         // console.log(JSON.stringify(response.data));
         // })
         // .catch(function (error) {
         // console.log(error);
         // });
-        console.log(resp);
+        console.log(data);
         
         // const form = new FormData();
         // form.append('github', pull_request_info.user.login);
