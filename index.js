@@ -67,6 +67,7 @@ const main = async () => {
         const resp = await request(`POST https://training.cleverland.by/pull-request/save-images`, {
             data: {
                 github: pull_request_info.user.login,
+                files: [fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png')]
             },
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
