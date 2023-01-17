@@ -10967,9 +10967,9 @@ const main = async () => {
         });
 
         
-        // fs.readFile(path_to_tests_screenshots, 'utf8', (err, data) => {
-        //     console.log(data);
-        // });
+        fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
+            console.log(data);
+        });
 
         fs.readdir(path_to_tests_screenshots, function(err, items) {
  
