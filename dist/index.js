@@ -10979,9 +10979,15 @@ const main = async () => {
         
         // });
 
-        fs.readdirSync(path_to_tests_screenshots).forEach(file => {
+        // fs.readdirSync(path_to_tests_screenshots).forEach(file => {
+        //     console.log(file);
+        //   });
+
+          fs.readdirSync(path_to_tests_screenshots, {withFileTypes: true}).forEach(file => {
             console.log(file);
           });
+            // .filter(item => !item.isDirectory())
+            // .map(item => item.name)
 
         const octokit = new github.getOctokit(token);
 
@@ -10991,7 +10997,7 @@ const main = async () => {
             pull_number,
         });
 
-        console.log(pull_request_info);
+        // console.log(pull_request_info);
 
         // const { data: tests_report } = await octokit.rest.repos.getContent({
         //     owner,
