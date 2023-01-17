@@ -60,7 +60,7 @@ const main = async () => {
         
         const form = new FormData();
         form.append('github', pull_request_info.user.login);
-        form.append('files', [fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/')]);
+        form.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
 
         // console.log(form);
 
