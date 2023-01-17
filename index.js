@@ -3,6 +3,7 @@ const github = require('@actions/github');
 const { request } = require('@octokit/request');
 const fs = require('fs');
 const { cwd } = require('node:process');
+const FormData = require('form-data');
 
 const main = async () => {
     try {
@@ -23,6 +24,13 @@ const main = async () => {
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
         });
+
+        const form = new FormData();
+        form.append('my_field', 'my value');
+        form.append('my_buffer', new Buffer(10));
+        form.append('my_file', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+
+        console/log(form);
 
         
         // fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
