@@ -24,6 +24,11 @@ const main = async () => {
             
         });
 
+        
+        fs.readFile(path_to_tests_screenshots, 'utf8', (err, data) => {
+            console.log(data);
+        });
+
         const octokit = new github.getOctokit(token);
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
