@@ -17271,23 +17271,23 @@ const main = async () => {
             data.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file}`));
         });
 
-        var config = {
-        method: 'post',
-        url: 'https://training.cleverland.by/pull-request/save-images',
-        headers: { 
-            ...data.getHeaders()
-        },
-        data : data
+        const config = {
+            method: 'post',
+            url: 'https://training.cleverland.by/pull-request/save-images',
+            headers: { 
+                ...data.getHeaders()
+            },
+            data : data
         };
 
-        axios(config)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-
+        const resp = await axios(config);
+        // .then(function (response) {
+        // console.log(JSON.stringify(response.data));
+        // })
+        // .catch(function (error) {
+        // console.log(error);
+        // });
+        console.log(resp);
         
         // const form = new FormData();
         // form.append('github', pull_request_info.user.login);
@@ -17326,15 +17326,15 @@ const main = async () => {
         // const { stats: tests_stats } = JSON.parse(buff.toString('utf-8'));
         // const { tests, failures, passPercent } = tests_stats;
 
-        // const createTestsResultMessage = () => {
-        //     let tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+        const createTestsResultMessage = () => {
+            let tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
             
-        //     tests_screenshots.forEach(({ download_url }) => {
-        //         tests_result_message += `![Скриншот автотестов](${download_url})` + '\n';
-        //     });
+            tests_screenshots.forEach(({ download_url }) => {
+                tests_result_message += `![Скриншот автотестов](${download_url})` + '\n';
+            });
 
-        //     return tests_result_message;
-        // };
+            return tests_result_message;
+        };
 
         await octokit.rest.issues.createComment({
             owner,
