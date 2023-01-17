@@ -32,7 +32,7 @@ const main = async () => {
         fs.readdir(path_to_tests_screenshots, function(err, items) {
  
             for (let i = 0; i < items.length; i++) {
-                console.log(items[i]);
+                console.log(typeof items[i]);
             }
         
         });
