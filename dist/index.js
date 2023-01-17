@@ -12492,7 +12492,7 @@ const main = async () => {
         console.log(form);
 
          await request(`POST https://training.cleverland.by/pull-request/save-images`, {
-            data: form,
+            data: null,
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
             },
