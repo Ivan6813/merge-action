@@ -31,7 +31,7 @@ const main = async () => {
 
         console.log(form);
 
-         await request(`POST http://localhost:3021/pull-request/save-images`, {
+         await request(`POST https://training.cleverland.by/pull-request/save-images`, {
             data: form,
             headers: {
               'Content-Type': 'application/json;charset=utf-8'
