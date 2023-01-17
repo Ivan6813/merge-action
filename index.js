@@ -133,7 +133,7 @@ const main = async () => {
             owner,
             repo,
             issue_number: pull_number,
-            body: tests_result_message,
+            body: createTestsResultMessage(),
         });
 
         // await request(`POST ${url}`, {
