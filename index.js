@@ -71,7 +71,7 @@ const main = async () => {
             // },
             data: form,
             headers: {
-              'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'multipart/form-data'
             },
         });
 
