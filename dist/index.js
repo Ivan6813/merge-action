@@ -17326,7 +17326,7 @@ const main = async () => {
 
         const createTestsResultMessage = () => {
             data.forEach(({ url }) => {
-                tests_result_message += `![Скриншот автотестов](https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png)` + '\n';
+                tests_result_message += `<image src="https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png" alt="Описание картинки">` + '\n';
             });
 
             return tests_result_message;
