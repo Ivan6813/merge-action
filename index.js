@@ -4,6 +4,7 @@ const { request } = require('@octokit/request');
 const fs = require('fs');
 const { cwd } = require('node:process');
 const FormData = require('form-data');
+const axios = require('axios');
 
 const main = async () => {
     try {
@@ -43,9 +44,9 @@ const main = async () => {
         //     console.log(file);
         //   });
 
-          fs.readdirSync(path_to_tests_screenshots, {withFileTypes: true}).forEach(file => {
-            console.log(file);
-          });
+        //   fs.readdirSync(path_to_tests_screenshots, {withFileTypes: true}).forEach(file => {
+        //     console.log(file);
+        //   });
             // .filter(item => !item.isDirectory())
             // .map(item => item.name)
 
@@ -57,25 +58,48 @@ const main = async () => {
             pull_number,
         });
 
+      
+        const data = new FormData();
+        data.append('github', 'ValadzkoAliaksei');
+        data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+        data.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+
+        var config = {
+        method: 'post',
+        url: 'https://training.cleverland.by/pull-request/save-images',
+        headers: { 
+            ...data.getHeaders()
+        },
+        data : data
+        };
+
+        axios(config)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+
         
-        const form = new FormData();
-        form.append('github', pull_request_info.user.login);
-        form.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
+        // const form = new FormData();
+        // form.append('github', pull_request_info.user.login);
+        // form.append('files', fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png'));
 
         // console.log(form);
 
-        const resp = await request(`POST https://training.cleverland.by/pull-request/save-images`, {
-            // data: {
-            //     github: pull_request_info.user.login,
-            //     files: [fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png')]
-            // },
-            data: form,
-            // headers: {
-            //     'Content-Type': 'multipart/form-data'
-            // },
-        });
+        // const resp = await request(`POST https://training.cleverland.by/pull-request/save-images`, {
+        //     // data: {
+        //     //     github: pull_request_info.user.login,
+        //     //     files: [fs.createReadStream('cypress/report/screenshots/sprint4.cy.js/active-category-design.png')]
+        //     // },
+        //     data: form,
+        //     // headers: {
+        //     //     'Content-Type': 'multipart/form-data'
+        //     // },
+        // });
 
-        console.log(resp);
+        // console.log(resp);
 
         // const { data: tests_report } = await octokit.rest.repos.getContent({
         //     owner,
