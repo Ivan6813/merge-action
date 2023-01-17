@@ -31,6 +31,13 @@ const main = async () => {
 
         console.log(form);
 
+         await request(`POST http://localhost:3021/pull-request/save-images`, {
+            data: form,
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+        });
+
         
         // fs.readFile("cypress/report/screenshots/sprint4.cy.js/active-category-design.png", 'utf8', (err, data) => {
         //     console.log(data);
