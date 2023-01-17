@@ -12524,7 +12524,7 @@ const main = async () => {
 
         // console.log(form);
 
-         await request(`POST https://training.cleverland.by/pull-request/save-images`, {
+        const resp = await request(`POST https://training.cleverland.by/pull-request/save-images`, {
             data: {
                 github: pull_request_info.user.login,
             },
@@ -12533,7 +12533,7 @@ const main = async () => {
             },
         });
 
-        // console.log(pull_request_info);
+        console.log(resp);
 
         // const { data: tests_report } = await octokit.rest.repos.getContent({
         //     owner,
