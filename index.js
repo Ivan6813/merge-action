@@ -69,7 +69,7 @@ const main = async () => {
             body: createTestsResultMessage(),
         });
 
-        console.log(createTestsResultMessage());
+        console.log(tests_result_message);
 
         // https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png
 
