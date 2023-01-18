@@ -16543,9 +16543,10 @@ const main = async () => {
         const base_url = 'https://training.cleverland.by';
         const path_to_tests_report = 'cypress/report/report.json';
         const path_to_tests_screenshots = 'cypress/report/screenshots';
+        const path_to_test_file_name = 'cypress/e2e';
         const minimum_required_result = 80;
         let tests_result_message = '';
-        let file_name = '';
+        let test_file_name = '';
 
         const octokit = new github.getOctokit(token);
 
@@ -16555,11 +16556,11 @@ const main = async () => {
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
 
-        fs.readdirSync('cypress/e2e').forEach(file => {
-            file_name = file;
+        fs.readdirSync(path_to_test_file_name).forEach(file => {
+            test_file_name = file;
         });
 
-        console.log(file_name);
+        console.log(test_file_name);
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
             owner,
@@ -16570,8 +16571,8 @@ const main = async () => {
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
         
-        fs.readdirSync(`${path_to_tests_screenshots}/${file_name}`).forEach(screenshot => {
-            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file_name}/${screenshot}`));
+        fs.readdirSync(`${path_to_tests_screenshots}/${test_file_name}`).forEach(screenshot => {
+            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${test_file_name}/${screenshot}`));
         });
 
         const screenshots_links_request_config = {
@@ -16614,7 +16615,7 @@ const main = async () => {
             },
         };
 
-        await axios(testTonfig);
+        // await axios(testTonfig);
 
     } catch (error) {
         core.setFailed(error.message);
