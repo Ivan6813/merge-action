@@ -1,10 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { request } = require('@octokit/request');
-const fs = require('fs');
-const { cwd } = require('node:process');
-const FormData = require('form-data');
 const axios = require('axios');
+const fs = require('fs');
+const FormData = require('form-data');
 
 const main = async () => {
     try {
@@ -13,8 +11,6 @@ const main = async () => {
         const pull_number = core.getInput('pull_number', { required: true });
         const token = core.getInput('token', { required: true });
         const base_url = 'https://training.cleverland.by';
-        const pull_opened_url = `${base_url}/pull-request/opened`;
-        const save_imges_url = `${base_url}/pull-request/save-images`
         const path_to_tests_report = 'cypress/report/report.json';
         const path_to_tests_screenshots = 'cypress/report/screenshots/sprint4.cy.js';
         const minimum_required_result = 80;
@@ -43,7 +39,7 @@ const main = async () => {
 
         const screenshots_links_request_config = {
             method: 'post',
-            url: save_imges_url,
+            url: `${base_url}/pull-request/save-images`,
             headers: { 
                 ...formData.getHeaders()
             },
@@ -67,42 +63,21 @@ const main = async () => {
             body: createTestsResultMessage(),
         });
 
-        console.log(tests_result_message);
-
         const testTonfig = {
             method: 'post',
-            url: pull_opened_url,
+            url: `${base_url}/pull-request/opened`,
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             data : { 
                 link: pull_request_info.html_url, 
-                github: pull_request_info.user.login,
+                github: 'ValadzkoAliaksei',
                 isTestsSuccess: false,
                 isFirstPush: true
             },
         };
 
-        await axios(testTonfig)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-
-        // https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png
-
-        // await request(`POST ${url}`, {
-        //     data: { 
-        //         link: pull_request_info.html_url, 
-        //         github: owner,
-        //         isTestsSuccess: passPercent >= minimum_required_result
-        //     },
-        //     headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        // });
+        await axios(testTonfig);
 
     } catch (error) {
         core.setFailed(error.message);
