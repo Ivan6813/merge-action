@@ -66,12 +66,14 @@ const main = async () => {
             return tests_result_message;
         };
       
-        await octokit.rest.issues.createComment({
+        const resp = await octokit.rest.issues.createComment({
             owner,
             repo,
             issue_number: pull_number,
             body: createTestsResultMessage(),
         });
+
+        console.log(resp);
 
         const testTonfig = {
             method: 'post',
