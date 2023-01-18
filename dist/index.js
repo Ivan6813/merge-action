@@ -17206,7 +17206,7 @@ const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
 const fs = __nccwpck_require__(7147);
 const { cwd } = __nccwpck_require__(7742);
-const FormData = __nccwpck_require__(4334);
+// const FormData = require('form-data');
 const axios = __nccwpck_require__(8757);
 
 const main = async () => {
@@ -17224,7 +17224,6 @@ const main = async () => {
         let tests_result_message = '';
 
         const octokit = new github.getOctokit(token);
-        const formData = new FormData();
 
         fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats: { tests, failures, passPercent } } = JSON.parse(data);
@@ -17238,13 +17237,14 @@ const main = async () => {
             pull_number,
         });
 
+        const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
         
         fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
 
-        const requestConfig = {
+        const screenshots_links_request_config = {
             method: 'post',
             url: save_imges_url,
             headers: { 
@@ -17253,15 +17253,11 @@ const main = async () => {
             data : formData
         };
 
-        const { data: screenshots } = await axios(requestConfig);
-
-        console.log(screenshots);
+        const { data: screenshots } = await axios(screenshots_links_request_config);
         
         const createTestsResultMessage = () => {
             screenshots.forEach(({ url }) => {
-                // tests_result_message += `![Скриншот автотестов](${base_url}${url})` + '\n';
-                tests_result_message += `[![Foo](${base_url}${url})](${base_url})` + '\n';
-                
+                tests_result_message += `![Скриншот автотестов](https://static.cleverland.by/media/screenshots/sprint1/Ivan6813/active-category-programming.png)` + '\n';
             });
 
             return tests_result_message;
@@ -17275,12 +17271,6 @@ const main = async () => {
         });
 
         console.log(tests_result_message);
-
-        // const testData = new FormData();
-        // testData.append('link', pull_request_info.html_url);
-        // testData.append('github', pull_request_info.user.login);
-        // testData.append('isTestsSuccess', 'false');
-        // testData.append('isFirstPush', 'true');
 
         const testTonfig = {
             method: 'post',
