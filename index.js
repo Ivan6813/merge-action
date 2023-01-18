@@ -47,7 +47,10 @@ const main = async () => {
 
         let str ='123 123 123 123  123';
 
-        console.log(str.replace(/\+/g, '%20'));
+        const result = str.replace(/\s+/g,"%20");
+
+        console.log(result);
+
 
         const screenshots_links_request_config = {
             method: 'post',
