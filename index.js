@@ -56,7 +56,8 @@ const main = async () => {
         
         const createTestsResultMessage = () => {
             screenshots.forEach(({ url }) => {
-                tests_result_message += `![Скриншот автотестов](${base_url}${url})` + '\n';
+                // tests_result_message += `![Скриншот автотестов](${base_url}${url})` + '\n';
+                tests_result_message += `[<img src="${base_url}${url}">](${base_url})` + '\n';
             });
 
             return tests_result_message;
