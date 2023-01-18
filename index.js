@@ -40,17 +40,8 @@ const main = async () => {
         formData.append('github', pull_request_info.user.login);
         
         fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
-            screenshot = screenshot.replace(/\s+/g,"%20");
-            console.log(screenshot);
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
-
-        // let str ='123 123 123 123  123';
-
-        // const result = str.replace(/\s+/g,"%20");
-
-        // console.log(result);
-
 
         const screenshots_links_request_config = {
             method: 'post',
@@ -65,6 +56,8 @@ const main = async () => {
         
         const createTestsResultMessage = () => {
             screenshots.forEach(({ url }) => {
+                url = url.replace(/\s+/g,"%20");
+                console.log(url);
                 tests_result_message += `![Скриншот автотестов](https://static.cleverland.by${url})` + '\n';
             });
 
