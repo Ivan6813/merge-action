@@ -25,7 +25,7 @@ const main = async () => {
         });
 
         const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
-        const path_to_tests_screenshots = `cypress/report/screenshots/${test_file_name}`;
+        const path_to_tests_screenshots = `cypress/report/screenshots/sprint1.cy.js`;
 
         console.log(test_file_name);
         console.log(path_to_tests_screenshots);
@@ -40,16 +40,16 @@ const main = async () => {
         formData.append('github', pull_request_info.user.login);
         
         fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
-            screenshot = screenshot.split(' ').join('%20');
+            screenshot = screenshot.replace(/\s+/g,"%20");
             console.log(screenshot);
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
 
-        let str ='123 123 123 123  123';
+        // let str ='123 123 123 123  123';
 
-        const result = str.replace(/\s+/g,"%20");
+        // const result = str.replace(/\s+/g,"%20");
 
-        console.log(result);
+        // console.log(result);
 
 
         const screenshots_links_request_config = {
