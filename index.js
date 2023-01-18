@@ -12,9 +12,10 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         const base_url = 'https://training.cleverland.by';
         const path_to_tests_report = 'cypress/report/report.json';
-        const path_to_tests_screenshots = 'cypress/report/screenshots/sprint1.cy.js';
+        const path_to_tests_screenshots = 'cypress/report/screenshots';
         const minimum_required_result = 80;
         let tests_result_message = '';
+        let file_name = '';
 
         const octokit = new github.getOctokit(token);
 
@@ -23,6 +24,12 @@ const main = async () => {
         
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
+
+        fs.readdirSync('cypress/e2e').forEach(file => {
+            file_name = file;
+        });
+
+        console.log(file_name);
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
             owner,
@@ -34,7 +41,7 @@ const main = async () => {
         formData.append('github', pull_request_info.user.login);
         
         fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
-            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
+            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file_name}/${screenshot}`));
         });
 
         const screenshots_links_request_config = {
