@@ -16570,7 +16570,7 @@ const main = async () => {
         formData.append('github', pull_request_info.user.login);
         
         fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
-            screenshot = name.split(' ').join('%20');
+            screenshot = screenshot.split(' ').join('%20');
             console.log(screenshot);
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
