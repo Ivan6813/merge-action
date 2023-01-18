@@ -16557,7 +16557,7 @@ const main = async () => {
 
         const test_file_name = fs.readdirSync(path_to_test_file_name);
 
-        console.log(test);
+        console.log(test_file_name);
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
             owner,
