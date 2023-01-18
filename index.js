@@ -21,15 +21,12 @@ const main = async () => {
         let tests_result_message = '';
 
         const octokit = new github.getOctokit(token);
+        const formData = new FormData();
 
-        fs.readFileSync(path_to_tests_report, 'utf8', (err, data) => {
+        fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats: { tests, failures, passPercent } } = JSON.parse(data);
         
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
-        });
-
-        fs.readdirSync(path_to_tests_screenshots).forEach(file => {
-            console.log(file);
         });
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
@@ -38,11 +35,10 @@ const main = async () => {
             pull_number,
         });
 
-        const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
         
-        fs.readdirSync(path_to_tests_screenshots).forEach(file => {
-            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file}`));
+        fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
+            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
 
         const requestConfig = {
@@ -72,6 +68,8 @@ const main = async () => {
             issue_number: pull_number,
             body: createTestsResultMessage(),
         });
+
+        console.log(createTestsResultMessage());
 
         // https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png
 
