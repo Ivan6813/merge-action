@@ -45,6 +45,10 @@ const main = async () => {
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
 
+        let str ='123 123 123 123  123';
+
+        console.log(str.replace(/\+/g, '%20'));
+
         const screenshots_links_request_config = {
             method: 'post',
             url: `${base_url}/pull-request/save-images`,
