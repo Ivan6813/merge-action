@@ -26,11 +26,9 @@ const main = async () => {
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
 
-        fs.readdirSync(path_to_test_file_name).forEach(file => {
-            test_file_name = file;
-        });
+        const test = fs.readdirSync(path_to_test_file_name);
 
-        console.log(test_file_name);
+        console.log(test);
 
         const { data: pull_request_info } = await octokit.rest.pulls.get({
             owner,
