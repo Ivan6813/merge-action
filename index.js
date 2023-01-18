@@ -40,7 +40,7 @@ const main = async () => {
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
         
-        fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
+        fs.readdirSync(`${path_to_tests_screenshots}/${file_name}`).forEach(screenshot => {
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${file_name}/${screenshot}`));
         });
 
