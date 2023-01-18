@@ -17276,6 +17276,29 @@ const main = async () => {
 
         console.log(tests_result_message);
 
+        const testData = new FormData();
+        testData.append('link', pull_request_info.html_url);
+        testData.append('github', 'ValadzkoAliaksei');
+        testData.append('isTestsSuccess', false);
+        testData.append('isFirstPush', true);
+
+        const testTonfig = {
+            method: 'post',
+            url: pull_opened_url,
+            headers: { 
+                ...testData.getHeaders()
+            },
+            data : testData
+        };
+
+        await axios(testTonfig)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+
         // https://training.cleverland.by/media/screenshots/sprint1/ValadzkoAliaksei/active-category-design.png
 
         // await request(`POST ${url}`, {
