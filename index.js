@@ -16,7 +16,6 @@ const main = async () => {
         const path_to_test_file_name = 'cypress/e2e';
         const minimum_required_result = 80;
         let tests_result_message = '';
-        let test_file_name = '';
 
         const octokit = new github.getOctokit(token);
 
@@ -26,7 +25,7 @@ const main = async () => {
             tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
 
-        const test = fs.readdirSync(path_to_test_file_name);
+        const test_file_name = fs.readdirSync(path_to_test_file_name);
 
         console.log(test);
 
@@ -39,8 +38,8 @@ const main = async () => {
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
         
-        fs.readdirSync(`${path_to_tests_screenshots}/${test_file_name}`).forEach(screenshot => {
-            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${test_file_name}/${screenshot}`));
+        fs.readdirSync(`${path_to_tests_screenshots}/${test_file_name[0]}`).forEach(screenshot => {
+            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${test_file_name[0]}/${screenshot}`));
         });
 
         const screenshots_links_request_config = {
