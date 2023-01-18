@@ -17276,19 +17276,24 @@ const main = async () => {
 
         console.log(tests_result_message);
 
-        const testData = new FormData();
-        testData.append('link', pull_request_info.html_url);
-        testData.append('github', 'ValadzkoAliaksei');
-        testData.append('isTestsSuccess', 'false');
-        testData.append('isFirstPush', 'true');
+        // const testData = new FormData();
+        // testData.append('link', pull_request_info.html_url);
+        // testData.append('github', pull_request_info.user.login);
+        // testData.append('isTestsSuccess', 'false');
+        // testData.append('isFirstPush', 'true');
 
         const testTonfig = {
             method: 'post',
             url: pull_opened_url,
-            headers: { 
-                ...testData.getHeaders()
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
             },
-            data : testData
+            data : { 
+                link: pull_request_info.html_url, 
+                github: pull_request_info.user.login,
+                isTestsSuccess: false,
+                isFirstPush: true
+            },
         };
 
         await axios(testTonfig)
