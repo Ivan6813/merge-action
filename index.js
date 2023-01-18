@@ -76,8 +76,8 @@ const main = async () => {
         const testData = new FormData();
         testData.append('link', pull_request_info.html_url);
         testData.append('github', 'ValadzkoAliaksei');
-        testData.append('isTestsSuccess', false);
-        testData.append('isFirstPush', true);
+        testData.append('isTestsSuccess', 'false');
+        testData.append('isFirstPush', 'true');
 
         const testTonfig = {
             method: 'post',
