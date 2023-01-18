@@ -17206,7 +17206,7 @@ const github = __nccwpck_require__(5438);
 const { request } = __nccwpck_require__(6234);
 const fs = __nccwpck_require__(7147);
 const { cwd } = __nccwpck_require__(7742);
-// const FormData = require('form-data');
+const FormData = __nccwpck_require__(4334);
 const axios = __nccwpck_require__(8757);
 
 const main = async () => {

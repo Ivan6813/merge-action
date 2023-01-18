@@ -3,7 +3,7 @@ const github = require('@actions/github');
 const { request } = require('@octokit/request');
 const fs = require('fs');
 const { cwd } = require('node:process');
-// const FormData = require('form-data');
+const FormData = require('form-data');
 const axios = require('axios');
 
 const main = async () => {
