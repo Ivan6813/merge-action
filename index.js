@@ -12,7 +12,7 @@ const main = async () => {
         const token = core.getInput('token', { required: true });
         const base_url = 'https://training.cleverland.by';
         const path_to_tests_report = 'cypress/report/report.json';
-        const path_to_tests_screenshots = 'cypress/report/screenshots';
+        const path_to_tests_screenshots = 'cypress/report/screenshots/sprint1.cy.js';
         const minimum_required_result = 80;
         let tests_result_message = '';
 
