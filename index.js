@@ -54,7 +54,7 @@ const main = async () => {
         
         const createTestsResultMessage = () => {
             screenshots.forEach(({ url }) => {
-                tests_result_message += `![Скриншот автотестов](https://static.cleverland.by/media/screenshots/sprint1/Ivan6813/active-category-programming.png)` + '\n';
+                tests_result_message += `![Скриншот автотестов](https://static.cleverland.by${url})` + '\n';
             });
 
             return tests_result_message;
