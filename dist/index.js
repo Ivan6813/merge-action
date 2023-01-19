@@ -16566,7 +16566,7 @@ const main = async () => {
             pull_number,
         });
 
-        console.log(pull_number);
+        console.log(pull_request_info);
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
