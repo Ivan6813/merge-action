@@ -16557,9 +16557,6 @@ const main = async () => {
         const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
         const path_to_tests_screenshots = `cypress/report/screenshots/sprint1.cy.js`;
 
-        console.log(test_file_name);
-        console.log(path_to_tests_screenshots);
-
         const { data: pull_request_info } = await octokit.rest.pulls.get({
             owner,
             repo,
@@ -16602,8 +16599,6 @@ const main = async () => {
             issue_number: pull_number,
             body: createTestsResultMessage(),
         });
-
-        console.log(resp);
 
         const testTonfig = {
             method: 'post',
