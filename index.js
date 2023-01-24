@@ -15,6 +15,7 @@ const main = async () => {
         const path_to_test_file_name = 'cypress/e2e';
         const minimum_required_result = 80;
         let tests_result_message = '';
+        const arrScreenName = [];
 
         const octokit = new github.getOctokit(token);
 
@@ -33,14 +34,17 @@ const main = async () => {
             pull_number,
         });
 
-        console.log(pull_request_info);
+        // console.log(pull_request_info);
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
         
         fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
+            arrScreenName.push(screenshot);
             formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
         });
+
+        console.log(arrScreenName);
 
         const screenshots_links_request_config = {
             method: 'post',
@@ -57,7 +61,7 @@ const main = async () => {
             screenshots.forEach(({ url }) => {
                 url = url.replace(/\s+/g,"%20");
                 console.log(url);
-                tests_result_message += `![Скриншот автотестов](https://static.cleverland.by${url})` + '\n';
+                tests_result_message += `![Скриншот автотестов](https://static.cleverland.by${url})` + '\n' + '===============' + '\n';
             });
 
             return tests_result_message;
