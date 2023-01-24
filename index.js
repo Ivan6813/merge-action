@@ -22,7 +22,7 @@ const main = async () => {
         fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats: { tests, failures, passPercent } } = JSON.parse(data);
         
-            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${Math.trunc(result)}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${Math.trunc(passPercent)}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
 
         const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
