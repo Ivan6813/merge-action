@@ -21,8 +21,10 @@ const main = async () => {
         fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats: { tests, failures, passPercent } } = JSON.parse(data);
         
-            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${passPercent}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: 33.333333333333%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
+
+        console.log(Math.trunc(33.3333333333333333));
 
         const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
         const path_to_tests_screenshots = `cypress/report/screenshots/sprint1.cy.js`;
