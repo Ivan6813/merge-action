@@ -16545,16 +16545,15 @@ const main = async () => {
         const path_to_test_file_name = 'cypress/e2e';
         const minimum_required_result = 80;
         let tests_result_message = '';
+        const result = 33.33333333333333333333333;
 
         const octokit = new github.getOctokit(token);
 
         fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
             const { stats: { tests, failures, passPercent } } = JSON.parse(data);
         
-            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: 33.333333333333%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${Math.trunc(result)}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
         });
-
-        console.log(Math.trunc(33.3333333333333333));
 
         const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
         const path_to_tests_screenshots = `cypress/report/screenshots/sprint1.cy.js`;
