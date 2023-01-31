@@ -42,9 +42,9 @@ const main = async () => {
 
         // console.log(pull_request_review_list);
 
-        const reveiwers = pull_request_review_list.map(({ user }) => user.login);
+        const reveiwers = [...new Set(pull_request_review_list.map(({ user }) => user.login))];
 
-        console.log(new Set(reveiwers));
+        console.log(reveiwers);
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
