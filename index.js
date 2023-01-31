@@ -38,9 +38,13 @@ const main = async () => {
             owner,
             repo,
             pull_number,
-          });
+        });
 
-        console.log(pull_request_review_list);
+        // console.log(pull_request_review_list);
+
+        const reveiwers = pull_request_review_list.map(({ user }) => user.login);
+
+        console.log(reveiwers);
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
