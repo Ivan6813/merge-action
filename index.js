@@ -34,7 +34,13 @@ const main = async () => {
             pull_number,
         });
 
-        // console.log(pull_request_info);
+        const { data: pull_request_review_list } = await octokit.rest.pulls.listReviewComments({
+            owner,
+            repo,
+            pull_number,
+          });
+
+        console.log(pull_request_review_list);
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
