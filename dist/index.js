@@ -16574,7 +16574,7 @@ const main = async () => {
 
         const reveiwers = pull_request_review_list.map(({ user }) => user.login);
 
-        console.log(reveiwers);
+        console.log(new Set(reveiwers));
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
