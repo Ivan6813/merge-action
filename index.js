@@ -34,17 +34,13 @@ const main = async () => {
             pull_number,
         });
 
-        const { data: pull_request_review_list } = await octokit.rest.pulls.listReviewComments({
+        const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
             owner,
             repo,
             pull_number,
         });
 
-        // console.log(pull_request_review_list);
-
-        const reveiwers = [...new Set(pull_request_review_list.map(({ user }) => user.login))];
-
-        console.log(reveiwers);
+        const reviewers = [...new Set(list_review_comments.map(({ user }) => user.login))];
 
         const formData = new FormData();
         formData.append('github', pull_request_info.user.login);
@@ -90,11 +86,40 @@ const main = async () => {
                 link: pull_request_info.html_url, 
                 github: 'ValadzkoAliaksei',
                 isTestsSuccess: false,
-                isFirstPush: true
+                isFirstPush: true,
+                reviewers: isFirstPush ? null : reviewers
             },
         };
 
         // await axios(testTonfig);
+
+        const { data: { sha } } = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path: 'cypress/hello.txt',
+        });
+
+        console.log(sha)
+
+        // await octokit.rest.repos.deleteFile({
+        //     owner,
+        //     repo,
+        //     path: 'cypress/hello.txt' ,
+        //     message: 'get out',
+        //     sha,
+        // });
+
+        // await octokit.rest.repos.createOrUpdateFileContents({
+        //     owner,
+        //     repo,
+        //     path,
+        //     message,
+        //     content,
+        //     committer.name,
+        //     committer.email,
+        //     author.name,
+        //     author.email
+        // })
 
     } catch (error) {
         core.setFailed(error.message);
