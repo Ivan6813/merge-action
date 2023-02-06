@@ -16630,16 +16630,18 @@ const main = async () => {
         // });
 
         const file = 'Ly8vIDxyZWZlcmVuY2UgdHlwZXM9ImN5cHJlc3MiIC8+CgpkZXNjcmliZSgnVGVzdCB3aWR0aCAxNDQwcHgnLCAoKSA9PiB7CiAgICBiZWZvcmVFYWNoKCgpID0+IHsKICAgICAgICBjeS52aWV3cG9ydCgxNDQwLCA5MDApOwogICAgICAgIGN5LnZpc2l0KCdodHRwOi8vbG9jYWxob3N0OjMwMDAnKTsKICAgICAgICBjeS5nZXQoImZvcm0iKTsKICAgICAgICBjeS5nZXQoJ2lucHV0W25hbWU9ImlkZW50aWZpZXIiXScpLnR5cGUoImlsaW5rZXZpY2giKS5zaG91bGQoImhhdmUudmFsdWUiLCAiaWxpbmtldmljaCIpOwogICAgICAgIGN5LmdldCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScpLnR5cGUoIktieXJ0ZGJ4MzQ3Nzk5Iikuc2hvdWxkKCJoYXZlLnZhbHVlIiwgIktieXJ0ZGJ4MzQ3Nzk5Iik7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPXNpZ24taW4tYnV0dG9uXScpLmNsaWNrKCkud2FpdCgxMDAwMCk7CiAgICB9KTsKCiAgICBpdCgndGVzdCBsYXlvdXQgY29udGVudCB2aWV3JywgKCkgPT4gewogICAgICAgIGN5LmdldCgnW2RhdGEtdGVzdC1pZD1idXR0b24tbWVudS12aWV3LWxpc3RdJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LWxpc3QnKTsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YnV0dG9uLW1lbnUtdmlldy13aW5kb3ddJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LXdpbmRvdycpOwogICAgfSk7CgogICAgaXQoJ3Rlc3QgbGF5b3V0IGJvb2stcGFnZScsICgpID0+IHsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9Y2FyZF0nKS5maXJzdCgpLmNsaWNrKCkKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YXBwXScpLnNjcmVlbnNob3QoJ2Jvb2stcGFnZScpOwogICAgfSk7Cn0pOw==';
-        const SPRINT_NUMBER = 4;
+        const SPRINT_NUMBER = 1;
+        const PATH_TO_TEST_FILE = 'cypress/e2e';
+        const COMMITTER_NAME = 'Monalisa Octocat';
+        const COMMITTER_EMAIL = 'octocat@github.com';
 
-    /***** получить sha файла *****/
+    /***** получить sha и path файла *****/
 
         const get_info_file_config = {
             method: 'get',
-            url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/e2e`,
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}`,
             headers: { 
                 'Accept': 'application/vnd.github+json', 
-                'X-GitHub-Api-Version': '2022-11-28', 
                 'Authorization': `Bearer ${token}`
             }
         };
@@ -16652,8 +16654,8 @@ const main = async () => {
         const delete_file_data = JSON.stringify({
             message: 'delete test file',
             committer: {
-                name: 'Monalisa Octocat',
-                email: 'octocat@github.com'
+                name: COMMITTER_NAME,
+                email: COMMITTER_EMAIL
             },
             sha
         });
@@ -16663,7 +16665,6 @@ const main = async () => {
             url: `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
             headers: { 
                 'Accept': 'application/vnd.github+json', 
-                'X-GitHub-Api-Version': '2022-11-28', 
                 'Authorization': `Bearer ${token}`, 
                 'Content-Type': 'text/plain'
             },
@@ -16677,19 +16678,18 @@ const main = async () => {
         const create_file_data = JSON.stringify({
             message: 'add new test file',
             committer:{
-                name: 'Monalisa Octocat',
-                email: 'octocat@github.com'
+                name: COMMITTER_NAME,
+                email: COMMITTER_EMAIL
             },
             content: file
         });
 
         const create_file_config = {
             method: 'put',
-            url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/e2e/sprint${SPRINT_NUMBER}.cy.js`,
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}/sprint${SPRINT_NUMBER}.cy.js`,
             headers: { 
                 'Accept': 'application/vnd.github+json', 
                 'Authorization': `Bearer ${token}`, 
-                'X-GitHub-Api-Version': '2022-11-28', 
                 'Content-Type': 'text/plain'
             },
             data : create_file_data
