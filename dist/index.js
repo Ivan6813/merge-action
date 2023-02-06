@@ -16664,7 +16664,7 @@ const main = async () => {
 
         const config = {
             method: 'put',
-            url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/hello-123.txt`,
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/hello.cy.js`,
             headers: { 
                 'Accept': 'application/vnd.github+json', 
                 'Authorization': `Bearer ${token}`, 
