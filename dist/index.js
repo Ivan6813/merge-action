@@ -16643,9 +16643,11 @@ const main = async () => {
             }
         };
         
-        const { data } = await axios(get_info_file_config);
+        const { data: file_info } = await axios(get_info_file_config);
+        const { sha, path } = file_info[0];
 
-        console.log('fuck', data);
+        console.log(sha);
+        console.log(path);
 
     /***** удаление старого файла *****/
 
