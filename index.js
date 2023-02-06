@@ -123,11 +123,14 @@ const main = async () => {
         //     author.email
         // })
 
-        const data = `{
-            "message": "it is new file",
-            "committer":{"name":"Monalisa Octocat","email":"octocat@github.com"},
-            "content":${file}
-        }`;
+        const data = JSON.stringify({
+            message: 'it is new file',
+            committer:{
+                name: 'Monalisa Octocat',
+                email: 'octocat@github.com'
+            },
+            content: file
+        });
 
         const config = {
             method: 'put',
