@@ -16631,13 +16631,13 @@ const main = async () => {
 
         console.log(sha)
 
-        // await octokit.rest.repos.deleteFile({
-        //     owner,
-        //     repo,
-        //     path: 'cypress/hello.txt' ,
-        //     message: 'get out',
-        //     sha,
-        // });
+        await octokit.rest.repos.deleteFile({
+            owner,
+            repo,
+            path: 'cypress/hello.txt',
+            message: 'get out',
+            sha,
+        });
 
         // await octokit.rest.repos.createOrUpdateFileContents({
         //     owner,
