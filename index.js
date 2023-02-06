@@ -76,20 +76,20 @@ const main = async () => {
             body: createTestsResultMessage(),
         });
 
-        const testTonfig = {
-            method: 'post',
-            url: `${base_url}/pull-request/opened`,
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            data : { 
-                link: pull_request_info.html_url, 
-                github: 'ValadzkoAliaksei',
-                isTestsSuccess: false,
-                isFirstPush: true,
-                reviewers: isFirstPush ? null : reviewers
-            },
-        };
+        // const testTonfig = {
+        //     method: 'post',
+        //     url: `${base_url}/pull-request/opened`,
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     data : { 
+        //         link: pull_request_info.html_url, 
+        //         github: 'ValadzkoAliaksei',
+        //         isTestsSuccess: false,
+        //         isFirstPush: true,
+        //         reviewers: isFirstPush ? null : reviewers
+        //     },
+        // };
 
         // await axios(testTonfig);
 
