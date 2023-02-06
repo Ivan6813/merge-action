@@ -93,33 +93,53 @@ const main = async () => {
 
         // await axios(testTonfig);
 
-        const { data: { sha } } = await octokit.rest.repos.getContent({
-            owner,
-            repo,
-            path: 'cypress/hello.txt',
-        });
+        // const { data: { sha } } = await octokit.rest.repos.getContent({
+        //     owner,
+        //     repo,
+        //     path: 'cypress/hello.txt',
+        // });
 
-        console.log(sha)
+        // console.log(sha);
 
-        await octokit.rest.repos.deleteFile({
-            owner,
-            repo,
-            path: 'cypress/hello.txt',
-            message: 'get out',
-            sha,
-        });
+        const file = 'Ly8vIDxyZWZlcmVuY2UgdHlwZXM9ImN5cHJlc3MiIC8+CgpkZXNjcmliZSgnVGVzdCB3aWR0aCAxNDQwcHgnLCAoKSA9PiB7CiAgICBiZWZvcmVFYWNoKCgpID0+IHsKICAgICAgICBjeS52aWV3cG9ydCgxNDQwLCA5MDApOwogICAgICAgIGN5LnZpc2l0KCdodHRwOi8vbG9jYWxob3N0OjMwMDAnKTsKICAgICAgICBjeS5nZXQoImZvcm0iKTsKICAgICAgICBjeS5nZXQoJ2lucHV0W25hbWU9ImlkZW50aWZpZXIiXScpLnR5cGUoImlsaW5rZXZpY2giKS5zaG91bGQoImhhdmUudmFsdWUiLCAiaWxpbmtldmljaCIpOwogICAgICAgIGN5LmdldCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScpLnR5cGUoIktieXJ0ZGJ4MzQ3Nzk5Iikuc2hvdWxkKCJoYXZlLnZhbHVlIiwgIktieXJ0ZGJ4MzQ3Nzk5Iik7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPXNpZ24taW4tYnV0dG9uXScpLmNsaWNrKCkud2FpdCgxMDAwMCk7CiAgICB9KTsKCiAgICBpdCgndGVzdCBsYXlvdXQgY29udGVudCB2aWV3JywgKCkgPT4gewogICAgICAgIGN5LmdldCgnW2RhdGEtdGVzdC1pZD1idXR0b24tbWVudS12aWV3LWxpc3RdJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LWxpc3QnKTsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YnV0dG9uLW1lbnUtdmlldy13aW5kb3ddJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LXdpbmRvdycpOwogICAgfSk7CgogICAgaXQoJ3Rlc3QgbGF5b3V0IGJvb2stcGFnZScsICgpID0+IHsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9Y2FyZF0nKS5maXJzdCgpLmNsaWNrKCkKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YXBwXScpLnNjcmVlbnNob3QoJ2Jvb2stcGFnZScpOwogICAgfSk7Cn0pOw==';
+
+        // await octokit.rest.repos.deleteFile({
+        //     owner,
+        //     repo,
+        //     path: 'cypress/hello.txt',
+        //     message: 'get out',
+        //     sha,
+        // });
 
         // await octokit.rest.repos.createOrUpdateFileContents({
         //     owner,
         //     repo,
         //     path,
-        //     message,
-        //     content,
+        //     message: 'it is new file',
+        //     content: file,
         //     committer.name,
         //     committer.email,
         //     author.name,
         //     author.email
         // })
+
+        const data = `{"it is new file","committer":{"name":"Monalisa Octocat","email":"octocat@github.com"},"content":${file}}`;
+
+        const config = {
+            method: 'put',
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/hello-123.txt`,
+            headers: { 
+                'Accept': 'application/vnd.github+json', 
+                'Authorization': `Bearer ${token}`, 
+                'X-GitHub-Api-Version': '2022-11-28', 
+                'Content-Type': 'text/plain'
+            },
+            data : data
+        };
+
+        await axios(config).then(function (response) {
+            console.log(JSON.stringify(response.data));
+        });
 
     } catch (error) {
         core.setFailed(error.message);
