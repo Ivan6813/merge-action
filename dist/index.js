@@ -16630,6 +16630,7 @@ const main = async () => {
         // });
 
         const file = 'Ly8vIDxyZWZlcmVuY2UgdHlwZXM9ImN5cHJlc3MiIC8+CgpkZXNjcmliZSgnVGVzdCB3aWR0aCAxNDQwcHgnLCAoKSA9PiB7CiAgICBiZWZvcmVFYWNoKCgpID0+IHsKICAgICAgICBjeS52aWV3cG9ydCgxNDQwLCA5MDApOwogICAgICAgIGN5LnZpc2l0KCdodHRwOi8vbG9jYWxob3N0OjMwMDAnKTsKICAgICAgICBjeS5nZXQoImZvcm0iKTsKICAgICAgICBjeS5nZXQoJ2lucHV0W25hbWU9ImlkZW50aWZpZXIiXScpLnR5cGUoImlsaW5rZXZpY2giKS5zaG91bGQoImhhdmUudmFsdWUiLCAiaWxpbmtldmljaCIpOwogICAgICAgIGN5LmdldCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScpLnR5cGUoIktieXJ0ZGJ4MzQ3Nzk5Iikuc2hvdWxkKCJoYXZlLnZhbHVlIiwgIktieXJ0ZGJ4MzQ3Nzk5Iik7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPXNpZ24taW4tYnV0dG9uXScpLmNsaWNrKCkud2FpdCgxMDAwMCk7CiAgICB9KTsKCiAgICBpdCgndGVzdCBsYXlvdXQgY29udGVudCB2aWV3JywgKCkgPT4gewogICAgICAgIGN5LmdldCgnW2RhdGEtdGVzdC1pZD1idXR0b24tbWVudS12aWV3LWxpc3RdJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LWxpc3QnKTsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YnV0dG9uLW1lbnUtdmlldy13aW5kb3ddJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LXdpbmRvdycpOwogICAgfSk7CgogICAgaXQoJ3Rlc3QgbGF5b3V0IGJvb2stcGFnZScsICgpID0+IHsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9Y2FyZF0nKS5maXJzdCgpLmNsaWNrKCkKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YXBwXScpLnNjcmVlbnNob3QoJ2Jvb2stcGFnZScpOwogICAgfSk7Cn0pOw==';
+        const SPRINT_NUMBER = 3;
 
     /***** получить sha файла *****/
 
@@ -16646,58 +16647,55 @@ const main = async () => {
         const { data: file_info } = await axios(get_info_file_config);
         const { sha, path } = file_info[0];
 
-        console.log(sha);
-        console.log(path);
-
     /***** удаление старого файла *****/
 
-        // const delete_file_data = JSON.stringify({
-        //     message: 'delete test file',
-        //     committer: {
-        //         name: 'Monalisa Octocat',
-        //         email: 'octocat@github.com'
-        //     },
-        //     sha: '0d5a690c8fad5e605a6e8766295d9d459d65de42'
-        // });
+        const delete_file_data = JSON.stringify({
+            message: 'delete test file',
+            committer: {
+                name: 'Monalisa Octocat',
+                email: 'octocat@github.com'
+            },
+            sha
+        });
 
-        // const delete_file_config = {
-        //     method: 'delete',
-        //     url: `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
-        //     headers: { 
-        //         'Accept': 'application/vnd.github+json', 
-        //         'X-GitHub-Api-Version': '2022-11-28', 
-        //         'Authorization': `Bearer ${token}`, 
-        //         'Content-Type': 'text/plain'
-        //     },
-        //     data : delete_file_data
-        // };
+        const delete_file_config = {
+            method: 'delete',
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+            headers: { 
+                'Accept': 'application/vnd.github+json', 
+                'X-GitHub-Api-Version': '2022-11-28', 
+                'Authorization': `Bearer ${token}`, 
+                'Content-Type': 'text/plain'
+            },
+            data : delete_file_data
+        };
 
-        // await axios(delete_file_config).then(({ data }) => console.log(JSON.stringify(data)));
+        await axios(delete_file_config).then(({ data }) => console.log(JSON.stringify(data)));
 
     /***** добавление нового файла *****/
 
-        // const create_file_data = JSON.stringify({
-        //     message: 'add new test file',
-        //     committer:{
-        //         name: 'Monalisa Octocat',
-        //         email: 'octocat@github.com'
-        //     },
-        //     content: file
-        // });
+        const create_file_data = JSON.stringify({
+            message: 'add new test file',
+            committer:{
+                name: 'Monalisa Octocat',
+                email: 'octocat@github.com'
+            },
+            content: file
+        });
 
-        // const create_file_config = {
-        //     method: 'put',
-        //     url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/e2e/sprint${sprint_number}.cy.js`,
-        //     headers: { 
-        //         'Accept': 'application/vnd.github+json', 
-        //         'Authorization': `Bearer ${token}`, 
-        //         'X-GitHub-Api-Version': '2022-11-28', 
-        //         'Content-Type': 'text/plain'
-        //     },
-        //     data : create_file_data
-        // };
+        const create_file_config = {
+            method: 'put',
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/cypress/e2e/sprint${SPRINT_NUMBER}.cy.js`,
+            headers: { 
+                'Accept': 'application/vnd.github+json', 
+                'Authorization': `Bearer ${token}`, 
+                'X-GitHub-Api-Version': '2022-11-28', 
+                'Content-Type': 'text/plain'
+            },
+            data : create_file_data
+        };
 
-        // await axios(create_file_config).then(({ data }) => console.log(JSON.stringify(data)));
+        await axios(create_file_config).then(({ data }) => console.log(JSON.stringify(data)));
 
     } catch (error) {
         core.setFailed(error.message);
