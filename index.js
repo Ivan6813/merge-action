@@ -103,6 +103,8 @@ const main = async () => {
         const SPRINT_NUMBER = 3;
         const PATH_TO_TEST_FILE = 'cypress/e2e';
         const COMMITTER = { name: 'Monalisa Octocat', email: 'octocat@github.com'};
+        const DELETE_COMMIT_MESSAGE = 'delete test file';
+        const ADD_COMMIT_MESSAGE = 'add new test file';
 
         const { data: { test_file_info } } = await octokit.rest.repos.getContent({
             owner,
