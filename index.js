@@ -154,19 +154,14 @@ const main = async () => {
             content: file
         });
 
-        const { data: org } = await octokit.rest.orgs.get({
-            org: 'ClevertecTest'
-        });
-
-
         const config = {
             method: 'get',
-            url: org.repos_url,
+            url: 'https://api.github.com/orgs/ClevertecTest/repos',
         };
 
         const { data } = await axios(config);
 
-        console.log('org', data);
+        console.log('repos', data);
 
         const create_file_config = {
             method: 'put',
