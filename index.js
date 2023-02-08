@@ -204,6 +204,7 @@ const main = async () => {
         // await axios(create_file_config);
 
     } catch (error) {
+        console.log(error.message);
         core.setFailed(error.message);
     }
 }
