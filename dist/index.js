@@ -16685,7 +16685,7 @@ const main = async () => {
         });
 
         const { data: org } = await octokit.rest.orgs.get({
-            owner,
+            org: 'ClevertecTest'
         });
 
         console.log('org', org);
