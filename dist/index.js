@@ -16671,7 +16671,7 @@ const main = async () => {
             data : delete_file_data
         };
 
-        await axios(delete_file_config);
+        // await axios(delete_file_config);
 
     /***** добавление нового файла *****/
 
@@ -16684,6 +16684,12 @@ const main = async () => {
             content: file
         });
 
+        const { data: org } = await octokit.rest.orgs.get({
+            owner,
+        });
+
+        console.log('org', org);
+
         const create_file_config = {
             method: 'put',
             url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}/sprint${SPRINT_NUMBER}.cy.js`,
@@ -16695,7 +16701,7 @@ const main = async () => {
             data : create_file_data
         };
 
-        await axios(create_file_config);
+        // await axios(create_file_config);
 
     } catch (error) {
         core.setFailed(error.message);
