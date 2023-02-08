@@ -158,7 +158,15 @@ const main = async () => {
             org: 'ClevertecTest'
         });
 
-        console.log('org', org.repos_url);
+
+        const config = {
+            method: 'get',
+            url: org.repos_url,
+        };
+
+        const { data } = await axios(config);
+
+        console.log('org', data);
 
         const create_file_config = {
             method: 'put',
