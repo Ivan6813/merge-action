@@ -16636,7 +16636,7 @@ const main = async () => {
         const DELETE_COMMIT_MESSAGE = 'delete test file';
         const ADD_COMMIT_MESSAGE = 'add new test file';
 
-        const { data: { test_file_info } } = await octokit.rest.repos.getContent({
+        const { data: test_file_info } = await octokit.rest.repos.getContent({
             owner,
             repo,
             path: PATH_TO_TEST_FILE,
