@@ -158,7 +158,7 @@ const main = async () => {
             org: 'ClevertecTest'
         });
 
-        console.log('org', org);
+        console.log('org', org.repos_url);
 
         const create_file_config = {
             method: 'put',
