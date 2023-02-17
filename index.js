@@ -113,13 +113,13 @@ const main = async () => {
             // console.log(Buffer.from(data).toString('base64'));
         });
 
-        const data = await octokit.rest.repos.getContent({
-            owner,
-            repo,
-            path: PATH_TO_TEST_FILE,
-        });
+        // const data = await octokit.rest.repos.getContent({
+        //     owner,
+        //     repo,
+        //     path: PATH_TO_TEST_FILE,
+        // });
 
-        console.log(data)
+        // console.log(data);
 
         //   const { sha, path } = test_file_info[0];
 
@@ -143,17 +143,19 @@ const main = async () => {
 
     /***** получить sha и path файла *****/
 
-        // const get_info_file_config = {
-        //     method: 'get',
-        //     url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}`,
-        //     headers: { 
-        //         'Accept': 'application/vnd.github+json', 
-        //         'Authorization': `Bearer ${token}`
-        //     }
-        // };
+        const get_info_file_config = {
+            method: 'get',
+            url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}`,
+            headers: { 
+                'Accept': 'application/vnd.github+json', 
+                'Authorization': `Bearer ${token}`
+            }
+        };
         
-        // const { data: file_info } = await axios(get_info_file_config);
-        // const { sha, path } = file_info[0];
+        const { data: file_info } = await axios(get_info_file_config);
+        const { sha, path } = file_info[0];
+
+        console.log(sha, path);
 
     /***** удаление старого файла *****/
 
