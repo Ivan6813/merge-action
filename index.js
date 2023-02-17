@@ -113,49 +113,47 @@ const main = async () => {
             // console.log(Buffer.from(data).toString('base64'));
         });
 
-        // const data = await octokit.rest.repos.getContent({
-        //     owner,
-        //     repo,
-        //     path: PATH_TO_TEST_FILE,
-        // });
+        const {data: test_file_info} = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path: PATH_TO_TEST_FILE,
+        });
 
-        // console.log(data);
+          const { sha, path } = test_file_info[0];
 
-        //   const { sha, path } = test_file_info[0];
+          await octokit.rest.repos.deleteFile({
+            owner,
+            repo,
+            path,
+            message: DELETE_COMMIT_MESSAGE,
+            sha,
+          });
 
-        //   await octokit.rest.repos.deleteFile({
-        //     owner,
-        //     repo,
-        //     path,
-        //     message: DELETE_COMMIT_MESSAGE,
-        //     sha,
-        //   });
-
-        //   await octokit.rest.repos.createOrUpdateFileContents({
-        //     owner,
-        //     repo,
-        //     path: `${PATH_TO_TEST_FILE}/sprint${SPRINT_NUMBER}.cy.js`,
-        //     message: ADD_COMMIT_MESSAGE,
-        //     content: FILE,
-        //     committer: COMMITTER,
-        //     author: COMMITTER,
-        //   });
+          await octokit.rest.repos.createOrUpdateFileContents({
+            owner,
+            repo,
+            path: `${PATH_TO_TEST_FILE}/sprint${SPRINT_NUMBER}.cy.js`,
+            message: ADD_COMMIT_MESSAGE,
+            content: FILE,
+            committer: COMMITTER,
+            author: COMMITTER,
+          });
 
     /***** получить sha и path файла *****/
 
-        const get_info_file_config = {
-            method: 'get',
-            url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}`,
-            headers: { 
-                'Accept': 'application/vnd.github+json', 
-                'Authorization': `Bearer ${token}`
-            }
-        };
+        // const get_info_file_config = {
+        //     method: 'get',
+        //     url: `https://api.github.com/repos/${owner}/${repo}/contents/${PATH_TO_TEST_FILE}`,
+        //     headers: { 
+        //         'Accept': 'application/vnd.github+json', 
+        //         'Authorization': `Bearer ${token}`
+        //     }
+        // };
         
-        const { data: file_info } = await axios(get_info_file_config);
-        const { sha, path } = file_info[0];
+        // const { data: file_info } = await axios(get_info_file_config);
+        // const { sha, path } = file_info[0];
 
-        console.log(sha, path);
+        // console.log(sha, path);
 
     /***** удаление старого файла *****/
 
