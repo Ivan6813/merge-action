@@ -19,62 +19,62 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
-            const { stats: { tests, failures, passPercent } } = JSON.parse(data);
+        // fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
+        //     const { stats: { tests, failures, passPercent } } = JSON.parse(data);
         
-            tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${Math.trunc(passPercent)}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
-        });
+        //     tests_result_message = '#  Результаты тестов' + '\n' + `Процент пройденных тестов: ${Math.trunc(passPercent)}%.` + '\n' + `Общее количество тестов: ${tests}.` + '\n' + `Количество непройденных тестов: ${failures}.` + '\n';
+        // });
 
-        const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
-        const path_to_tests_screenshots = `cypress/report/screenshots/sprint1.cy.js`;
+        // const test_file_name = fs.readdirSync(path_to_test_file_name)[0];
+        // const path_to_tests_screenshots = `cypress/report/screenshots/sprint1.cy.js`;
 
-        const { data: pull_request_info } = await octokit.rest.pulls.get({
-            owner,
-            repo,
-            pull_number,
-        });
+        // const { data: pull_request_info } = await octokit.rest.pulls.get({
+        //     owner,
+        //     repo,
+        //     pull_number,
+        // });
 
-        const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
-            owner,
-            repo,
-            pull_number,
-        });
+        // const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
+        //     owner,
+        //     repo,
+        //     pull_number,
+        // });
 
-        const reviewers = [...new Set(list_review_comments.map(({ user }) => user.login))];
+        // const reviewers = [...new Set(list_review_comments.map(({ user }) => user.login))];
 
-        const formData = new FormData();
-        formData.append('github', pull_request_info.user.login);
+        // const formData = new FormData();
+        // formData.append('github', pull_request_info.user.login);
         
-        fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
-            formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
-        });
+        // fs.readdirSync(path_to_tests_screenshots).forEach(screenshot => {
+        //     formData.append('files', fs.createReadStream(`${path_to_tests_screenshots}/${screenshot}`));
+        // });
 
-        const screenshots_links_request_config = {
-            method: 'post',
-            url: `${base_url}/pull-request/save-images`,
-            headers: { 
-                ...formData.getHeaders()
-            },
-            data : formData
-        };
+        // const screenshots_links_request_config = {
+        //     method: 'post',
+        //     url: `${base_url}/pull-request/save-images`,
+        //     headers: { 
+        //         ...formData.getHeaders()
+        //     },
+        //     data : formData
+        // };
 
-        const { data: screenshots } = await axios(screenshots_links_request_config);
+        // const { data: screenshots } = await axios(screenshots_links_request_config);
         
-        const createTestsResultMessage = () => {
-            screenshots.forEach(({ name, url }) => {
-                url = url.replace(/\s+/g,"%20");
-                tests_result_message += '***' + '\n' + `**${name}**` + '\n' + `![Скриншот автотестов](https://static.cleverland.by${url})` + '\n';
-            });
+        // const createTestsResultMessage = () => {
+        //     screenshots.forEach(({ name, url }) => {
+        //         url = url.replace(/\s+/g,"%20");
+        //         tests_result_message += '***' + '\n' + `**${name}**` + '\n' + `![Скриншот автотестов](https://static.cleverland.by${url})` + '\n';
+        //     });
 
-            return tests_result_message;
-        };
+        //     return tests_result_message;
+        // };
       
-        const resp = await octokit.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number: pull_number,
-            body: createTestsResultMessage(),
-        });
+        // const resp = await octokit.rest.issues.createComment({
+        //     owner,
+        //     repo,
+        //     issue_number: pull_number,
+        //     body: createTestsResultMessage(),
+        // });
 
         // const testTonfig = {
         //     method: 'post',
