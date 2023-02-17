@@ -16637,7 +16637,7 @@ const main = async () => {
         const ADD_COMMIT_MESSAGE = 'add new test file';
         let FILE = '';
 
-        fs.readFileSync('cypress/sprint4.cy.js', 'utf8', (err, data) => {
+        fs.readFile('cypress/sprint4.cy.js', 'utf8', (err, data) => {
             // console.log('file', data);
             FILE = Buffer.from(data).toString('base64')
             // console.log(Buffer.from(data).toString('base64'));
