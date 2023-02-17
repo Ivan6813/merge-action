@@ -133,7 +133,9 @@ const main = async () => {
         //   });
 
         fs.readFile('cypress/sprint4.cy.js', 'utf8', (err, data) => {
-            console.log('file', data);
+            // console.log('file', data);
+
+            console.log(Buffer.from(data).toString('base64'));
         });
 
     /***** получить sha и path файла *****/
