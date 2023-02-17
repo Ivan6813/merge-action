@@ -113,31 +113,33 @@ const main = async () => {
             // console.log(Buffer.from(data).toString('base64'));
         });
 
-        const { data: test_file_info } = await octokit.rest.repos.getContent({
+        const data = await octokit.rest.repos.getContent({
             owner,
             repo,
             path: PATH_TO_TEST_FILE,
-          });
+        });
 
-          const { sha, path } = test_file_info[0];
+        console.log(data)
 
-          await octokit.rest.repos.deleteFile({
-            owner,
-            repo,
-            path,
-            message: DELETE_COMMIT_MESSAGE,
-            sha,
-          });
+        //   const { sha, path } = test_file_info[0];
 
-          await octokit.rest.repos.createOrUpdateFileContents({
-            owner,
-            repo,
-            path: `${PATH_TO_TEST_FILE}/sprint${SPRINT_NUMBER}.cy.js`,
-            message: ADD_COMMIT_MESSAGE,
-            content: FILE,
-            committer: COMMITTER,
-            author: COMMITTER,
-          });
+        //   await octokit.rest.repos.deleteFile({
+        //     owner,
+        //     repo,
+        //     path,
+        //     message: DELETE_COMMIT_MESSAGE,
+        //     sha,
+        //   });
+
+        //   await octokit.rest.repos.createOrUpdateFileContents({
+        //     owner,
+        //     repo,
+        //     path: `${PATH_TO_TEST_FILE}/sprint${SPRINT_NUMBER}.cy.js`,
+        //     message: ADD_COMMIT_MESSAGE,
+        //     content: FILE,
+        //     committer: COMMITTER,
+        //     author: COMMITTER,
+        //   });
 
     /***** получить sha и path файла *****/
 
