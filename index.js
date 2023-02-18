@@ -116,7 +116,7 @@ const main = async () => {
         //     FILE = Buffer.from(data).toString('base64');
         // });
 
-        fs.readFile('https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js', 'utf8', (err, data) => {
+        fs.readFileSync('https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js', 'utf8', (err, data) => {
             FILE = Buffer.from(data).toString('base64');
             console.log('file', data);
         });
