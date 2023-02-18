@@ -16651,17 +16651,14 @@ const main = async () => {
             // console.log('file', data);
         });
 
-        const data = await octokit.rest.repos.getContent({
+        const {data: test_file_info} = await octokit.rest.repos.getContent({
             owner,
             repo,
             path: 'README.md',
         });
 
-        console.log(JSON.stringify(data));
 
-        // const { sha, path } = test_file_info[0];
-
-          
+        const { sha, path } = test_file_info;
 
           await octokit.rest.repos.deleteFile({
             owner,
