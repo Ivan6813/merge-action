@@ -118,18 +118,18 @@ const main = async () => {
 
         fs.readFile('cypress/README.md', 'utf8', (err, data) => {
             FILE = Buffer.from(data).toString('base64');
-            console.log('file', data);
+            // console.log('file', data);
         });
 
-        const {data: test_file_info} = await octokit.rest.repos.getContent({
+        const data = await octokit.rest.repos.getContent({
             owner,
             repo,
             path: 'README.md',
         });
 
-        console.log(sha, path);
+        console.log(JSON.stringify(data));
 
-        const { sha, path } = test_file_info[0];
+        // const { sha, path } = test_file_info[0];
 
           
 
