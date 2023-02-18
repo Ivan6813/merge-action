@@ -124,7 +124,7 @@ const main = async () => {
         const {data: test_file_info} = await octokit.rest.repos.getContent({
             owner,
             repo,
-            path: './README.md',
+            path: 'README.md',
         });
 
           const { sha, path } = test_file_info[0];
