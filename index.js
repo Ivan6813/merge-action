@@ -127,9 +127,11 @@ const main = async () => {
             path: 'README.md',
         });
 
-          const { sha, path } = test_file_info[0];
+        console.log(sha, path);
 
-          console.log(sha, path);
+        const { sha, path } = test_file_info[0];
+
+          
 
           await octokit.rest.repos.deleteFile({
             owner,
