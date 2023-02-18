@@ -16646,37 +16646,37 @@ const main = async () => {
         //     FILE = Buffer.from(data).toString('base64');
         // });
 
-        fs.readFile('cypress/README.md', 'utf8', (err, data) => {
+        fs.readFile('https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js', 'utf8', (err, data) => {
             FILE = Buffer.from(data).toString('base64');
-            // console.log('file', data);
+            console.log('file', data);
         });
 
-        const {data: test_file_info} = await octokit.rest.repos.getContent({
-            owner,
-            repo,
-            path: 'README.md',
-        });
+        // const {data: test_file_info} = await octokit.rest.repos.getContent({
+        //     owner,
+        //     repo,
+        //     path: 'README.md',
+        // });
 
 
-        const { sha, path } = test_file_info;
+        // const { sha, path } = test_file_info;
 
-          await octokit.rest.repos.deleteFile({
-            owner,
-            repo,
-            path,
-            message: DELETE_COMMIT_MESSAGE,
-            sha,
-          });
+        //   await octokit.rest.repos.deleteFile({
+        //     owner,
+        //     repo,
+        //     path,
+        //     message: DELETE_COMMIT_MESSAGE,
+        //     sha,
+        //   });
 
-          await octokit.rest.repos.createOrUpdateFileContents({
-            owner,
-            repo,
-            path: path,
-            message: ADD_COMMIT_MESSAGE,
-            content: FILE,
-            committer: COMMITTER,
-            author: COMMITTER,
-          });
+        //   await octokit.rest.repos.createOrUpdateFileContents({
+        //     owner,
+        //     repo,
+        //     path: path,
+        //     message: ADD_COMMIT_MESSAGE,
+        //     content: FILE,
+        //     committer: COMMITTER,
+        //     author: COMMITTER,
+        //   });
 
     /***** получить sha и path файла *****/
 
