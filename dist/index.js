@@ -16549,10 +16549,10 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        fs.readFile('cypress/README.md', 'utf8', (err, data) => {
-            // FILE = Buffer.from(data).toString('base64');
-            console.log('readme', data);
-        });
+        // fs.readFile('cypress/README.md', 'utf8', (err, data) => {
+        //     // FILE = Buffer.from(data).toString('base64');
+        //     console.log('readme', data);
+        // });
 
         // fs.readFile(path_to_tests_report, 'utf8', (err, data) => {
         //     const { stats: { tests, failures, passPercent } } = JSON.parse(data);
@@ -16653,7 +16653,7 @@ const main = async () => {
         const {data: test_file_info} = await octokit.rest.repos.getContent({
             owner,
             repo,
-            path: './README.md',
+            path: 'README.md',
         });
 
           const { sha, path } = test_file_info[0];
@@ -16669,7 +16669,7 @@ const main = async () => {
           await octokit.rest.repos.createOrUpdateFileContents({
             owner,
             repo,
-            path: './README.md',
+            path: path,
             message: ADD_COMMIT_MESSAGE,
             content: FILE,
             committer: COMMITTER,
