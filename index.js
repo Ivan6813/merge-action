@@ -116,10 +116,22 @@ const main = async () => {
         //     FILE = Buffer.from(data).toString('base64');
         // });
 
-        fs.readFileSync('https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js', 'utf8', (err, data) => {
-            FILE = Buffer.from(data).toString('base64');
-            console.log('file', data);
-        });
+        // fs.readFileSync('https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js', 'utf8', (err, data) => {
+        //     FILE = Buffer.from(data).toString('base64');
+        //     console.log('file', data);
+        // });
+
+            const testTonfig = {
+            method: 'get',
+            url: 'https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+        };
+
+        const data = await axios(testTonfig);
+
+        console.log('fsdfds', data);
 
         // const {data: test_file_info} = await octokit.rest.repos.getContent({
         //     owner,
