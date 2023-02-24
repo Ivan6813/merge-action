@@ -16562,7 +16562,7 @@ const main = async () => {
         // });
 
         const statistics = list_review_comments.map(({ user }) => {
-            const result = [];
+            let result = [];
             const currentObj = result.find(({reviewer}) => reviewer === user.login);
             console.log(currentObj);
             if (currentObj) {
