@@ -16562,6 +16562,7 @@ const main = async () => {
         // });
 
         const statistics = list_review_comments.reduce((acc, { user }) => {
+            console.log('acc', acc);
             const currentObj = acc.find(({reviewer}) => reviewer === user.login);
             console.log(currentObj);
             if (currentObj) {
