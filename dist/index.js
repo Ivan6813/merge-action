@@ -16561,15 +16561,22 @@ const main = async () => {
         //     pull_number,
         // });
 
-        const findReviewer = ({ reviewer }) => reviewer === user.login;
-
         const statistics = list_review_comments.reduce((acc, { user }) => {
-            if (acc.some(findReviewer)) {
-                const currentObj = acc.find(findReviewer);
-                currentObj.commentsCount += 1;
-            } else {
-                acc.push({ reviewer: user.login, commentsCount: 1 });
-            }
+            acc.forEach(({ reviewer }, index) => {
+                if (reviewer === user.login) {
+                    // const currentObj = acc.find(({reviewer}) => reviewer === user.login);
+                    // currentObj.commentsCount += 1;
+                    acc[index].commentsCount += 1;
+                } else {
+                    acc.push({ reviewer: user.login, commentsCount: 1 });
+                }
+            });
+            // if (acc.some(({ reviewer }) => reviewer === user.login)) {
+            //     const currentObj = acc.find(({reviewer}) => reviewer === user.login);
+            //     currentObj.commentsCount += 1;
+            // } else {
+            //     acc.push({ reviewer: user.login, commentsCount: 1 });
+            // }
 
             return acc;
         }, []);
