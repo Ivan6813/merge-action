@@ -25,16 +25,9 @@ const main = async () => {
             pull_number,
         });
 
-        // const { data: reviews } = await octokit.rest.pulls.listReviews({
-        //     owner,
-        //     repo,
-        //     pull_number,
-        // });
-
         const statistics = list_review_comments.reduce((acc, { user }) => {
             if (acc.some(({ reviewer }) => reviewer === user.login)) {
-                acc.find(({reviewer}) => reviewer === user.login).commentsCount += 1;
-                // currentObj.commentsCount += 1;
+                acc.find(({ reviewer }) => reviewer === user.login).commentsCount += 1;
             } else {
                 acc.push({ reviewer: user.login, commentsCount: 1 });
             }
