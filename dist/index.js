@@ -16549,12 +16549,13 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        const { data } = await octokit.rest.issues.listEventsForRepo({
+        const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
             owner,
             repo,
+            pull_number,
         });
 
-        console.log(data);
+        console.log(list_review_comments);
 
         // fs.readFile('cypress/README.md', 'utf8', (err, data) => {
         //     // FILE = Buffer.from(data).toString('base64');
