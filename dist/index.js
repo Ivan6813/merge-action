@@ -16568,7 +16568,7 @@ const main = async () => {
             if (currentObj) {
                 currentObj.commentsCount += 1
             } else {
-                acc = [...acc, { reviewer: user.login, commentsCount: 1 }];
+                acc.concat({ reviewer: user.login, commentsCount: 1 });
             }
         }, []);
 
