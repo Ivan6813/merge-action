@@ -16549,19 +16549,31 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        // const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
-        //     owner,
-        //     repo,
-        //     pull_number,
-        // });
-
-        const { data: reviews } = await octokit.rest.pulls.listReviews({
+        const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
             owner,
             repo,
             pull_number,
         });
 
-        console.log(reviews);
+        // const { data: reviews } = await octokit.rest.pulls.listReviews({
+        //     owner,
+        //     repo,
+        //     pull_number,
+        // });
+
+        const statistic = list_review_comments.map(({ user }) => {
+            const result = [];
+            const currentObj = result.find(({reviewer}) => reviewer === user.login);
+            if (currentObj) {
+                currentObj.commentsCount += 1
+            } else {
+                result.push({ reviewer: user.login, commentsCount: 1 });
+            }
+
+            return result;
+        });
+
+        console.log(statistic);
 
         // const statistic = [{ reviewer: "Ivan6813", commentsCount: 3 }];
 
