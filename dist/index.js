@@ -16549,6 +16549,13 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
+        const { data } = await octokit.rest.activity.listRepoEvents({
+            owner,
+            repo,
+        });
+
+        console.log(data);
+
         // fs.readFile('cypress/README.md', 'utf8', (err, data) => {
         //     // FILE = Buffer.from(data).toString('base64');
         //     console.log('readme', data);
@@ -16635,12 +16642,12 @@ const main = async () => {
         // });
 
         // const FILE = 'Ly8vIDxyZWZlcmVuY2UgdHlwZXM9ImN5cHJlc3MiIC8+CgpkZXNjcmliZSgnVGVzdCB3aWR0aCAxNDQwcHgnLCAoKSA9PiB7CiAgICBiZWZvcmVFYWNoKCgpID0+IHsKICAgICAgICBjeS52aWV3cG9ydCgxNDQwLCA5MDApOwogICAgICAgIGN5LnZpc2l0KCdodHRwOi8vbG9jYWxob3N0OjMwMDAnKTsKICAgICAgICBjeS5nZXQoImZvcm0iKTsKICAgICAgICBjeS5nZXQoJ2lucHV0W25hbWU9ImlkZW50aWZpZXIiXScpLnR5cGUoImlsaW5rZXZpY2giKS5zaG91bGQoImhhdmUudmFsdWUiLCAiaWxpbmtldmljaCIpOwogICAgICAgIGN5LmdldCgnaW5wdXRbbmFtZT0icGFzc3dvcmQiXScpLnR5cGUoIktieXJ0ZGJ4MzQ3Nzk5Iikuc2hvdWxkKCJoYXZlLnZhbHVlIiwgIktieXJ0ZGJ4MzQ3Nzk5Iik7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPXNpZ24taW4tYnV0dG9uXScpLmNsaWNrKCkud2FpdCgxMDAwMCk7CiAgICB9KTsKCiAgICBpdCgndGVzdCBsYXlvdXQgY29udGVudCB2aWV3JywgKCkgPT4gewogICAgICAgIGN5LmdldCgnW2RhdGEtdGVzdC1pZD1idXR0b24tbWVudS12aWV3LWxpc3RdJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LWxpc3QnKTsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YnV0dG9uLW1lbnUtdmlldy13aW5kb3ddJykuc2hvdWxkKCdiZS5leGlzdCcpLmNsaWNrKCk7CiAgICAgICAgY3kuZ2V0KCdbZGF0YS10ZXN0LWlkPWFwcF0nKS5zY3JlZW5zaG90KCdjb250ZW50LXdpbmRvdycpOwogICAgfSk7CgogICAgaXQoJ3Rlc3QgbGF5b3V0IGJvb2stcGFnZScsICgpID0+IHsKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9Y2FyZF0nKS5maXJzdCgpLmNsaWNrKCkKICAgICAgICBjeS5nZXQoJ1tkYXRhLXRlc3QtaWQ9YXBwXScpLnNjcmVlbnNob3QoJ2Jvb2stcGFnZScpOwogICAgfSk7Cn0pOw==';
-        const SPRINT_NUMBER = 3;
-        const PATH_TO_TEST_FILE = 'cypress/e2e';
-        const COMMITTER = { name: 'Monalisa Octocat', email: 'octocat@github.com'};
-        const DELETE_COMMIT_MESSAGE = 'delete test file';
-        const ADD_COMMIT_MESSAGE = 'add new test file';
-        let FILE = '';
+        // const SPRINT_NUMBER = 3;
+        // const PATH_TO_TEST_FILE = 'cypress/e2e';
+        // const COMMITTER = { name: 'Monalisa Octocat', email: 'octocat@github.com'};
+        // const DELETE_COMMIT_MESSAGE = 'delete test file';
+        // const ADD_COMMIT_MESSAGE = 'add new test file';
+        // let FILE = '';
 
         // fs.readFile('cypress/sprint4.cy.js', 'utf8', (err, data) => {
         //     FILE = Buffer.from(data).toString('base64');
@@ -16651,17 +16658,17 @@ const main = async () => {
         //     console.log('file', data);
         // });
 
-            const testTonfig = {
-            method: 'get',
-            url: 'https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-        };
+        //     const testTonfig = {
+        //     method: 'get',
+        //     url: 'https://static.cleverland.by/media/sprint1/1676728269/sprint4.cy.js',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        // };
 
-        const data = await axios(testTonfig);
+        // const data = await axios(testTonfig);
 
-        console.log('fsdfds', data);
+        // console.log('fsdfds', data);
 
         // const {data: test_file_info} = await octokit.rest.repos.getContent({
         //     owner,
