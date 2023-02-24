@@ -34,6 +34,7 @@ const main = async () => {
         const statistic = list_review_comments.map(({ user }) => {
             const result = [];
             const currentObj = result.find(({reviewer}) => reviewer === user.login);
+            console.log(currentObj);
             if (currentObj) {
                 currentObj.commentsCount += 1
             } else {
