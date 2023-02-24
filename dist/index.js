@@ -16561,18 +16561,15 @@ const main = async () => {
         //     pull_number,
         // });
 
-        const statistics = list_review_comments.map(({ user }) => {
-            let result = [];
-            const currentObj = result.find(({reviewer}) => reviewer === user.login);
+        const statistics = list_review_comments.reduce((acc, { user }) => {
+            const currentObj = acc.find(({reviewer}) => reviewer === user.login);
             console.log(currentObj);
             if (currentObj) {
                 currentObj.commentsCount += 1
             } else {
-                result = [...result, { reviewer: user.login, commentsCount: 1 }];
+                acc.push({ reviewer: user.login, commentsCount: 1 });
             }
-
-            return result;
-        });
+        }, []);
 
         console.log(statistics);
 
