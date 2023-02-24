@@ -19,7 +19,7 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        octokit.rest.issues.listEventsForRepo({
+        const { data } = await octokit.rest.issues.listEventsForRepo({
             owner,
             repo,
         });
