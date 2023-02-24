@@ -16549,13 +16549,21 @@ const main = async () => {
 
         const octokit = new github.getOctokit(token);
 
-        const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
+        // const { data: list_review_comments } = await octokit.rest.pulls.listReviewComments({
+        //     owner,
+        //     repo,
+        //     pull_number,
+        // });
+
+        const { data: reviews } = await octokit.rest.pulls.listReviews({
             owner,
             repo,
             pull_number,
         });
 
-        console.log(list_review_comments);
+        console.log(reviews);
+
+        // const statistic = [{ reviewer: "Ivan6813", commentsCount: 3 }];
 
         // fs.readFile('cypress/README.md', 'utf8', (err, data) => {
         //     // FILE = Buffer.from(data).toString('base64');
