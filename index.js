@@ -31,20 +31,20 @@ const main = async () => {
         //     pull_number,
         // });
 
-        const statistic = list_review_comments.map(({ user }) => {
+        const statistics = list_review_comments.map(({ user }) => {
             const result = [];
             const currentObj = result.find(({reviewer}) => reviewer === user.login);
             console.log(currentObj);
             if (currentObj) {
                 currentObj.commentsCount += 1
             } else {
-                result.push({ reviewer: user.login, commentsCount: 1 });
+                result = [...result, { reviewer: user.login, commentsCount: 1 }];
             }
 
             return result;
         });
 
-        console.log(statistic);
+        console.log(statistics);
 
         // const statistic = [{ reviewer: "Ivan6813", commentsCount: 3 }];
 
