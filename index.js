@@ -32,21 +32,12 @@ const main = async () => {
         // });
 
         const statistics = list_review_comments.reduce((acc, { user }) => {
-            acc.forEach(({ reviewer }, index) => {
-                if (reviewer === user.login) {
-                    // const currentObj = acc.find(({reviewer}) => reviewer === user.login);
-                    // currentObj.commentsCount += 1;
-                    acc[index].commentsCount += 1;
-                } else {
-                    acc.push({ reviewer: user.login, commentsCount: 1 });
-                }
-            });
-            // if (acc.some(({ reviewer }) => reviewer === user.login)) {
-            //     const currentObj = acc.find(({reviewer}) => reviewer === user.login);
-            //     currentObj.commentsCount += 1;
-            // } else {
-            //     acc.push({ reviewer: user.login, commentsCount: 1 });
-            // }
+            if (acc.some(({ reviewer }) => reviewer === user.login)) {
+                acc.find(({reviewer}) => reviewer === user.login).commentsCount += 1;
+                // currentObj.commentsCount += 1;
+            } else {
+                acc.push({ reviewer: user.login, commentsCount: 1 });
+            }
 
             return acc;
         }, []);
