@@ -31,9 +31,11 @@ const main = async () => {
         //     pull_number,
         // });
 
+        const findReviewer = ({ reviewer }) => reviewer === user.login;
+
         const statistics = list_review_comments.reduce((acc, { user }) => {
-            if (acc.some(({ reviewer }) => reviewer === user.login)) {
-                const currentObj = acc.find(({reviewer}) => reviewer === user.login);
+            if (acc.some(findReviewer)) {
+                const currentObj = acc.find(findReviewer);
                 currentObj.commentsCount += 1;
             } else {
                 acc.push({ reviewer: user.login, commentsCount: 1 });
