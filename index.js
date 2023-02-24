@@ -32,14 +32,13 @@ const main = async () => {
         // });
 
         const statistics = list_review_comments.reduce((acc, { user }) => {
-            // console.log('acc', acc);
-            // const currentObj = acc.find(({reviewer}) => reviewer === user.login);
-            // console.log(currentObj);
-            // if (currentObj) {
-            //     currentObj.commentsCount += 1
-            // } else {
+            if (!acc.some(({ reviewer }) => reviewer === user.login)) {
                 acc.push({ reviewer: user.login, commentsCount: 1 });
-            // }
+            } else {
+                const currentObj = acc.find(({reviewer}) => reviewer === user.login);
+                if (currentObj) currentObj.commentsCount += 1;
+            }
+
             return acc;
         }, []);
 
