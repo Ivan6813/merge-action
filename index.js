@@ -42,7 +42,7 @@ const main = async () => {
         }, []);
 
         const statistics1 = reviews.reduce((acc, { user, state }) => {
-            if (!(acc.some(({ reviewer }) => reviewer === user.login) && state === 'APPROVED')) {
+            if ((!acc.some(({ reviewer }) => reviewer === user.login) && state === 'APPROVED')) {
                 acc.push({ reviewer: user.login, commentsCount: 0 });
             }
 
