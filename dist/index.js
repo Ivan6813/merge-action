@@ -16571,17 +16571,13 @@ const main = async () => {
             return acc;
         }, []);
 
-        const statistics1 = reviews.reduce((acc, { user, state }) => {
-            if ((!acc.some(({ reviewer }) => reviewer === user.login) && state === 'APPROVED')) {
-                acc.push({ reviewer: user.login, commentsCount: 0 });
+        reviews.forEach(({ user, state }) => {
+            if ((!statistics.some(({ reviewer }) => reviewer === user.login) && state === 'APPROVED')) {
+                statistics.push({ reviewer: user.login, commentsCount: 0 });
             }
+        });
 
-            return acc;
-        }, statistics);
-
-      
-
-        console.log(statistics1);
+        console.log(statistics);
 
         // const statistic = [{ reviewer: "Ivan6813", commentsCount: 3 }];
 
